@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { HouseholdSchema, LocationSchema, AirCategorySchema } from '@/domain/types';
 import { assembleDayPlan } from '@/domain/plan';
 import { fetchAirData, synthesizeManualAir } from '@/services/airData';
-import { generateTemplateNarration } from '@/services/templateNarration';
+import { narratePlan } from '@/services/llm/narrate';
 import { checkRateLimit, getClientIp } from '@/services/rateLimit';
 
 const PlanRequestSchema = z.object({
@@ -97,13 +97,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       plan.civic = 'Delhi-NCR Winter Smog Advisory: Check official municipal notices for local air quality alerts.';
     }
 
-    const narration = generateTemplateNarration(plan, lang);
+    const { narration, mode } = await narratePlan(plan, household, lang);
 
     console.info(
       JSON.stringify({
         route: '/api/plan',
         ms: Date.now() - start,
-        mode: 'rules',
+        mode,
         airSource,
       })
     );
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         plan,
         narration,
         meta: {
-          mode: 'rules',
+          mode,
           airSource,
           generatedAt: new Date().toISOString(),
         },
