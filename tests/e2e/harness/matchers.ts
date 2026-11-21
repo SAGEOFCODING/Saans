@@ -65,8 +65,8 @@ export const ErrorEnvelopeSchema = z.object({
   error: z.object({
     code: z.string().min(1),
     message: z.string().min(1),
-  }),
-});
+  }).strict(),
+}).strict();
 
 /**
  * Zod schema for Action item inside DayPlan.
@@ -101,7 +101,7 @@ export const MemberRiskSchema = z.object({
 });
 
 export const DayPlanSchema = z.object({
-  air: z.any(),
+  air: AirSchema,
   risks: z.array(MemberRiskSchema),
   blocks: z.array(BlockSchema),
   baseline: z.number().optional(),

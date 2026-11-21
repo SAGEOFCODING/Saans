@@ -1,0 +1,711 @@
+[
+  {
+    "id": "bedroom-purifier-night",
+    "domain": "indoor",
+    "title": {
+      "en": "Run a HEPA air purifier in the bedroom overnight",
+      "hi": "रात में बेडरूम में HEPA एयर प्यूरीफायर चलाएं"
+    },
+    "why": {
+      "en": "You spend about a third of the day asleep in one room. Cleaning that air lowers exposure the most.",
+      "hi": "आप दिन का लगभग एक-तिहाई हिस्सा एक कमरे में सोते हुए बिताते हैं। वहां की हवा साफ करने से प्रदूषण सबसे ज्यादा घटता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 },
+        { "f": "home.purifier", "op": "in", "v": ["none", "living"] }
+      ]
+    },
+    "requires": { "budget": ["mid"] },
+    "modifiers": [
+      { "block": "night-sleep", "set": { "envFactor": 0.3 } }
+    ],
+    "effort": 1,
+    "cost": "mid",
+    "confidence": "high",
+    "protective": true,
+    "excludes": ["diy-box-fan-filter"]
+  },
+  {
+    "id": "diy-box-fan-filter",
+    "domain": "indoor",
+    "title": {
+      "en": "Build a DIY box-fan filter with a MERV-13 filter",
+      "hi": "MERV-13 फिल्टर के साथ DIY बॉक्स-फैन एयर फिल्टर बनाएं"
+    },
+    "why": {
+      "en": "A box-fan taped to an HVAC/MERV-13 filter cleans bedroom air at a fraction of commercial purifier cost.",
+      "hi": "बॉक्स-फैन पर MERV-13 फिल्टर लगाने से कम खर्चे में प्यूरीफायर जैसी स्वच्छ हवा मिलती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 },
+        { "f": "home.purifier", "op": "in", "v": ["none", "living"] }
+      ]
+    },
+    "requires": { "budget": ["free", "low"] },
+    "modifiers": [
+      { "block": "night-sleep", "set": { "envFactor": 0.38 } }
+    ],
+    "effort": 2,
+    "cost": "low",
+    "confidence": "medium",
+    "protective": true,
+    "excludes": ["bedroom-purifier-night"]
+  },
+  {
+    "id": "seal-window-drafts",
+    "domain": "indoor",
+    "title": {
+      "en": "Seal leaky window gaps and door frames with weatherstripping",
+      "hi": "खिड़की और दरवाजों की दरारों को वेदरस्ट्रिप से सील करें"
+    },
+    "why": {
+      "en": "Draft sealing reduces outdoor smog infiltration by up to 30% without any electricity use.",
+      "hi": "दरारों को सील करने से बाहरी धुंध का घर में प्रवेश 30% तक कम हो जाता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "home.windows", "op": "==", "v": "leaky" },
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "night-sleep", "set": { "envFactor": 0.45 } },
+      { "block": "daytime", "set": { "envFactor": 0.5 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "ventilate-best-window",
+    "domain": "indoor",
+    "title": {
+      "en": "Ventilate rooms only during the cleanest afternoon window",
+      "hi": "केवल दोपहर के सबसे स्वच्छ समय में ही खिड़कियां खोलें"
+    },
+    "why": {
+      "en": "Solar warming lifts the inversion layer in the afternoon, lowering outdoor PM2.5 compared to stagnant mornings.",
+      "hi": "दोपहर में धूप से हवा का फैलाव बेहतर होता है, जिससे सुबह की तुलना में प्रदूषण कम रहता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "wet-mop-surfaces",
+    "domain": "indoor",
+    "title": {
+      "en": "Wet-mop floors instead of dry sweeping",
+      "hi": "सूखी झाड़ू लगाने के बजाय गीला पोछा लगाएं"
+    },
+    "why": {
+      "en": "Dry sweeping resuspends settled toxic fine particles into breathing zones; wet mopping traps them safely.",
+      "hi": "सूखी झाड़ू से धूल के बारीक कण हवा में दोबारा उड़ते हैं; गीला पोछा उन्हें साफ कर देता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "n95-fitted-commute",
+    "domain": "commute",
+    "title": {
+      "en": "Wear a fitted N95 respirator during commute",
+      "hi": "सफर के दौरान सही फिटिंग वाला N95 मास्क पहनें"
+    },
+    "why": {
+      "en": "A snug N95 mask filters out 75-95% of fine particulate matter directly from traffic exhaust.",
+      "hi": "फिटेड N95 मास्क ट्रैफिक धुएं से 75-95% बारीक प्रदूषक कणों को रोकता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 },
+        { "f": "mobility.mode", "op": "in", "v": ["two-wheeler", "walk", "auto", "bus"] }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "protectionFactor": 0.25 } },
+      { "block": "commute-evening", "set": { "protectionFactor": 0.25 } }
+    ],
+    "effort": 1,
+    "cost": "low",
+    "confidence": "high",
+    "protective": true
+  },
+  {
+    "id": "metro-swap-commute",
+    "domain": "commute",
+    "title": {
+      "en": "Switch two-wheeler commute to the air-conditioned Metro",
+      "hi": "दोपहिया वाहन के बजाय मेट्रो से सफर करें"
+    },
+    "why": {
+      "en": "Underground and elevated metro coaches filter air, reducing commute particulate exposure by over 40% and cutting personal transport emissions.",
+      "hi": "मेट्रो कोच में हवा फिल्टर्ड होती है जिससे प्रदूषण कम होता है और उत्सर्जन भी घटता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.mode", "op": "==", "v": "two-wheeler" },
+        { "f": "air.aqi", "op": ">=", "v": 201 }
+      ]
+    },
+    "requires": { "budget": ["low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "envFactor": 0.7 } },
+      { "block": "commute-evening", "set": { "envFactor": 0.7 } }
+    ],
+    "effort": 2,
+    "cost": "low",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "shift-commute-offpeak",
+    "domain": "commute",
+    "title": {
+      "en": "Shift travel time away from early morning rush hour",
+      "hi": "सफर का समय सुबह की भारी भीड़ और धुंध से हटाकर बदलें"
+    },
+    "why": {
+      "en": "Peak morning traffic coincides with winter ground inversion, creating dense pollutant corridors along roads.",
+      "hi": "सुबह के पीक ऑवर में ट्रैफिक और धुंध सबसे ज्यादा होती है; समय बदलने से सांस में जाने वाला धुआं घटता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 201 },
+        { "f": "mobility.mode", "op": "in", "v": ["two-wheeler", "car-recirc", "car-open", "bus", "auto"] }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "envFactor": 0.85 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "car-ac-recirculate",
+    "domain": "commute",
+    "title": {
+      "en": "Keep car windows closed with AC set to cabin air recirculation",
+      "hi": "कार की खिड़कियां बंद रखें और AC को रीसर्कुलेशन मोड पर चलाएं"
+    },
+    "why": {
+      "en": "Recirculation prevents toxic exhaust gases from entering the cabin, cutting particulate exposure by half.",
+      "hi": "रीसर्कुलेशन मोड बाहर के जहरीले धुएं को कार में आने से रोकता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.mode", "op": "in", "v": ["car-open", "car-recirc"] }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "envFactor": 0.5 } },
+      { "block": "commute-evening", "set": { "envFactor": 0.5 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "walk-cleaner-streets",
+    "domain": "commute",
+    "title": {
+      "en": "Walk along interior residential lanes rather than main arterial roads",
+      "hi": "मुख्य सड़क के बजाय अंदरूनी कॉलोनियों के रास्तों से चलें"
+    },
+    "why": {
+      "en": "Fine particulate concentrations drop sharply just 50 meters away from bumper-to-bumper vehicular traffic.",
+      "hi": "सड़क के मुख्य ट्रैफिक से केवल 50 मीटर दूर अंदरूनी गलियों में प्रदूषण काफी कम होता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.mode", "op": "==", "v": "walk" },
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "envFactor": 0.9 } },
+      { "block": "commute-evening", "set": { "envFactor": 0.9 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "kitchen-chimney-on",
+    "domain": "cooking",
+    "title": {
+      "en": "Turn on kitchen exhaust chimney or fan throughout cooking",
+      "hi": "खाना पकाते समय किचन चिमनी या एग्जॉस्ट फैन लगातार चलाएं"
+    },
+    "why": {
+      "en": "Cooking unvented gas or oil releases fine PM and NO2 directly into the living space.",
+      "hi": "चिमनी चलाने से खाना पकाने के दौरान निकलने वाला धुआं और हानिकारक गैसें तुरंत बाहर निकल जाती हैं।"
+    },
+    "when": {
+      "all": [
+        { "f": "home.cooking", "op": "in", "v": ["lpg", "png"] }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "morning-routine", "set": { "indoorSource": 0 } },
+      { "block": "evening-routine", "set": { "indoorSource": 0 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "induction-swap-cooking",
+    "domain": "cooking",
+    "title": {
+      "en": "Use an electric induction cooktop instead of gas stove",
+      "hi": "गैस चूल्हे की जगह इलेक्ट्रिक इंडक्शन का इस्तेमाल करें"
+    },
+    "why": {
+      "en": "Electric induction eliminates combustion emissions entirely from indoor air and avoids carbon emissions.",
+      "hi": "इंडक्शन से घर के अंदर कोई धुआं या दहन गैसें नहीं निकलतीं।"
+    },
+    "when": {
+      "all": [
+        { "f": "home.cooking", "op": "in", "v": ["lpg", "png", "biomass"] }
+      ]
+    },
+    "requires": { "budget": ["mid"] },
+    "modifiers": [
+      { "block": "morning-routine", "set": { "indoorSource": 0 } },
+      { "block": "evening-routine", "set": { "indoorSource": 0 } }
+    ],
+    "effort": 2,
+    "cost": "mid",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "cook-lidded-vessels",
+    "domain": "cooking",
+    "title": {
+      "en": "Cook in closed, lidded pots and pressure cookers",
+      "hi": "ढक्कन वाले बर्तनों और प्रेशर कुकर में खाना पकाएं"
+    },
+    "why": {
+      "en": "Lidded cooking contains oil vapor and moisture, cutting indoor cooking emissions and saving cooking fuel.",
+      "hi": "ढककर पकाने से तेल के कण और भाप हवा में नहीं फैलते और ईंधन भी बचता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "home.cooking", "op": "in", "v": ["lpg", "png"] }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "evening-routine", "set": { "indoorSource": 5 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "avoid-incense-coils",
+    "domain": "indoor",
+    "title": {
+      "en": "Eliminate indoor incense sticks, dhoop, and mosquito coils",
+      "hi": "घर के अंदर अगरबत्ती, धूप और मच्छर भगाने वाली कॉइल न जलाएं"
+    },
+    "why": {
+      "en": "Burning a single incense stick emits PM2.5 comparable to multiple cigarettes inside closed rooms.",
+      "hi": "कमरे में अगरबत्ती या कॉइल जलाने से अत्यधिक हानिकारक धुआं और बारीक कण बनते हैं।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "morning-routine", "set": { "indoorSource": 0 } },
+      { "block": "evening-routine", "set": { "indoorSource": 0 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "avoid-biomass-heating",
+    "domain": "heating",
+    "title": {
+      "en": "Avoid burning wood, coal, or waste for winter warmth",
+      "hi": "सर्दी से बचने के लिए लकड़ी, कोयला या कचरा जलाने से बचें"
+    },
+    "why": {
+      "en": "Open biomass and waste burning releases dense carcinogenic soot that stays trapped at ground level.",
+      "hi": "खुले में लकड़ी या कचरा जलाने से अत्यधिक जहरीला धुआं सीधे सांस में जाता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 201 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": true
+  },
+  {
+    "id": "electric-layer-heating",
+    "domain": "heating",
+    "title": {
+      "en": "Use thermal clothing layers and electric heating instead of open fire",
+      "hi": "अलाव के बजाय गर्म कपड़ों की परतें और इलेक्ट्रिक हीटर का उपयोग करें"
+    },
+    "why": {
+      "en": "Thermal layers keep you warm with zero local air emissions, safeguarding indoor air purity.",
+      "hi": "गर्म कपड़ों और हीटर से बिना किसी धुएं के सुरक्षित गर्माहट मिलती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "shift-exercise-indoor",
+    "domain": "habit",
+    "title": {
+      "en": "Move morning outdoor walk or exercise indoors",
+      "hi": "सुबह की सैर या व्यायाम को घर के अंदर करें"
+    },
+    "why": {
+      "en": "Deep breathing during intense morning exercise multiplies particulate lung deposition up to tenfold in winter smog.",
+      "hi": "ठंड और धुंध में बाहर व्यायाम करते समय गहरी सांस लेने से फेफड़ों में कई गुना ज्यादा धुआं जाता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.exercisesOutdoors", "op": "==", "v": true },
+        { "f": "air.aqi", "op": ">=", "v": 201 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "morning-routine", "set": { "activityFactor": 1.0, "envFactor": 0.6 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "walk-best-window",
+    "domain": "habit",
+    "title": {
+      "en": "Reschedule outdoor stroll to the afternoon sunshine window",
+      "hi": "सैर का समय बदलकर दोपहर की धूप वाले समय में करें"
+    },
+    "why": {
+      "en": "Afternoon sunlight breaks the thermal inversion layer, offering significantly cleaner air than dawn hours.",
+      "hi": "दोपहर में धूप निकलने पर प्रदूषण की परत ऊपर उठती है और हवा साफ होती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.exercisesOutdoors", "op": "==", "v": true },
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "morning-routine", "set": { "activityFactor": 1.0 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "reschedule-kids-play",
+    "domain": "habit",
+    "title": {
+      "en": "Shift children's outdoor play to between 12:00 PM and 3:00 PM",
+      "hi": "बच्चों के खेलने का समय दोपहर 12 से 3 बजे के बीच रखें"
+    },
+    "why": {
+      "en": "Children breathe faster than adults; keeping them indoors during morning and late evening smog spikes protects developing lungs.",
+      "hi": "बच्चे तेजी से सांस लेते हैं; सुबह और देर शाम की धुंध से बचाना उनके फेफड़ों के लिए आवश्यक है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 },
+        { "f": "mobility.schoolAge", "op": "==", "v": true }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "wfh-smog-peak-day",
+    "domain": "habit",
+    "title": {
+      "en": "Utilize work-from-home options on severe smog days",
+      "hi": "अत्यधिक प्रदूषण वाले दिनों में वर्क-फ्रॉम-होम का लाभ उठाएं"
+    },
+    "why": {
+      "en": "Eliminating transit entirely saves 2 hours of direct roadway exposure and prevents vehicular carbon emissions.",
+      "hi": "सफर न करने से रास्ते के धुएं से पूरा बचाव होता है और ट्रैफिक जाम भी घटता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.wfhDays", "op": ">", "v": 0 },
+        { "f": "air.aqi", "op": ">=", "v": 301 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "envFactor": 0.6, "hours": 0 } },
+      { "block": "commute-evening", "set": { "envFactor": 0.6, "hours": 0 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false
+  },
+  {
+    "id": "nasal-hydration-rinse",
+    "domain": "habit",
+    "title": {
+      "en": "Stay well hydrated and rinse eyes/face upon returning home",
+      "hi": "खूब पानी पिएं और बाहर से लौटने पर चेहरा व आंखें धोएं"
+    },
+    "why": {
+      "en": "Hydration keeps respiratory mucosal membranes moist and functioning to expel inhaled coarse particles.",
+      "hi": "शरीर में पानी की पर्याप्त मात्रा श्वसन तंत्र को नम रखती है जिससे धूल के कण बाहर निकलते हैं।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 101 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "rwa-dust-suppression",
+    "domain": "community",
+    "title": {
+      "en": "Coordinate society water-sprinkling on unpaved roads and construction sites",
+      "hi": "सोसाइटी में कच्ची सड़कों और निर्माण स्थलों पर पानी का छिड़काव कराएं"
+    },
+    "why": {
+      "en": "Surface water sprinkling suppresses road dust resuspension, cutting local community particulate spikes.",
+      "hi": "पानी छिड़कने से उड़ने वाली धूल बैठ जाती है और परिसर की हवा बेहतर होती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 201 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 2,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false,
+    "pmTier": "high"
+  },
+  {
+    "id": "stop-waste-burning",
+    "domain": "community",
+    "title": {
+      "en": "Enforce strict ban on open garbage and leaf burning in the neighborhood",
+      "hi": "पड़ोस में कचरा और सूखी पत्तियां जलाने पर सख्त रोक लगाएं"
+    },
+    "why": {
+      "en": "Open burning of mixed waste produces toxic dioxins and heavy local PM spikes right outside homes.",
+      "hi": "खुले में कचरा जलाने से घरों के आसपास अत्यधिक जहरीला धुआं और डायॉक्सीन फैलते हैं।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 201 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 2,
+    "cost": "free",
+    "confidence": "high",
+    "protective": true,
+    "pmTier": "high"
+  },
+  {
+    "id": "generator-grid-discipline",
+    "domain": "community",
+    "title": {
+      "en": "Discipline diesel generator backup runs and service air filters",
+      "hi": "डीजल जनरेटर का उपयोग सीमित करें और उनके फिल्टर समय पर बदलें"
+    },
+    "why": {
+      "en": "Unserviced residential diesel generators emit unburned black carbon directly into residential courtyards.",
+      "hi": "अनियंत्रित डीजल जनरेटर से काला धुआं और कालिख सीधे घरों की खिड़कियों तक पहुंचती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 301 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 2,
+    "cost": "free",
+    "confidence": "high",
+    "protective": false,
+    "pmTier": "medium"
+  },
+  {
+    "id": "neighborhood-carpool-board",
+    "domain": "community",
+    "title": {
+      "en": "Organize a society carpool & school bus roster",
+      "hi": "सोसाइटी में कारपूल और स्कूल बस की साझा व्यवस्था बनाएं"
+    },
+    "why": {
+      "en": "Consolidating 4 passenger trips into 1 vehicle saves transport CO2e and reduces society gate congestion.",
+      "hi": "एक साथ सफर करने से गाड़ियों की संख्या घटती है, जाम नहीं लगता और कार्बन उत्सर्जन भी कम होता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [],
+    "effort": 2,
+    "cost": "free",
+    "confidence": "medium",
+    "protective": false,
+    "pmTier": "low"
+  },
+  {
+    "id": "seal-door-sweeps",
+    "domain": "indoor",
+    "title": {
+      "en": "Install rubber bottom sweeps on entrance doors",
+      "hi": "मुख्य दरवाजों के नीचे रबर सीलिंग स्ट्रिप लगाएं"
+    },
+    "why": {
+      "en": "Door thresholds allow heavy dust corridors from corridors and stairwells into the apartment.",
+      "hi": "दरवाजों के नीचे की जगह से सीढ़ियों और लॉबी की धूल घर के अंदर आती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "air.aqi", "op": ">=", "v": 151 }
+      ]
+    },
+    "requires": { "budget": ["low", "mid"] },
+    "modifiers": [
+      { "block": "daytime", "set": { "envFactor": 0.55 } }
+    ],
+    "effort": 1,
+    "cost": "low",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "bus-transit-swap",
+    "domain": "commute",
+    "title": {
+      "en": "Shift two-wheeler commute to CNG / Electric city bus",
+      "hi": "दोपहिया के बजाय CNG या इलेक्ट्रिक बस से सफर करें"
+    },
+    "why": {
+      "en": "Enclosed buses shield commuters from direct motorcycle exhaust plumes and cut per-passenger emissions.",
+      "hi": "बस के अंदर रहने से सड़क के सीधे धुएं से बचाव होता है और प्रति व्यक्ति प्रदूषण घटता है।"
+    },
+    "when": {
+      "all": [
+        { "f": "mobility.mode", "op": "==", "v": "two-wheeler" },
+        { "f": "air.aqi", "op": ">=", "v": 201 }
+      ]
+    },
+    "requires": { "budget": ["low", "mid"] },
+    "modifiers": [
+      { "block": "commute-morning", "set": { "envFactor": 0.9 } },
+      { "block": "commute-evening", "set": { "envFactor": 0.9 } }
+    ],
+    "effort": 2,
+    "cost": "low",
+    "confidence": "medium",
+    "protective": false
+  },
+  {
+    "id": "living-purifier-day",
+    "domain": "indoor",
+    "title": {
+      "en": "Operate living room purifier on automatic mode during daytime",
+      "hi": "दिन के समय लिविंग रूम में प्यूरीफायर को ऑटो मोड पर चलाएं"
+    },
+    "why": {
+      "en": "Continuous low-speed filtration clears background infiltration while family members are active in common areas.",
+      "hi": "दिन में सामान्य कमरों में प्यूरीफायर चलाने से परिवार के सदस्यों को स्वच्छ हवा मिलती है।"
+    },
+    "when": {
+      "all": [
+        { "f": "home.purifier", "op": "in", "v": ["living", "both"] },
+        { "f": "air.aqi", "op": ">=", "v": 151 }
+      ]
+    },
+    "requires": { "budget": ["free", "low", "mid"] },
+    "modifiers": [
+      { "block": "daytime", "set": { "envFactor": 0.3 } }
+    ],
+    "effort": 1,
+    "cost": "free",
+    "confidence": "high",
+    "protective": true
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "_note": "Vetted clean-air playbook topics, guidance snippets, and scientific myth-busters. Non-medical guidance.",
+  "topics": {
+    "ventilation": {
+      "title": "Smart Natural Ventilation",
+      "summary": "Ventilate rooms only during the warmest afternoon hours (typically 12:00 PM to 3:30 PM) when boundary-layer mixing height is highest and ambient PM2.5 dips. Keep windows and balcony doors shut during cold morning and evening stagnant periods.",
+      "source_hint": "CPCB & IIT Delhi diurnal boundary layer dynamics",
+      "confidence": "high"
+    },
+    "purifier_sizing": {
+      "title": "Air Purifier Sizing & Placement",
+      "summary": "Choose an air purifier with a CADR (Clean Air Delivery Rate) suitable for your room size. Rule of thumb: CADR in m³/h should be at least 5× the room volume (floor area × ceiling height). Place the purifier at least 1-2 feet away from walls and avoid blowing clean air into doors.",
+      "source_hint": "AHAM AC-1 standard & ASHRAE 62.2",
+      "confidence": "high"
+    },
+    "mask_fit": {
+      "title": "Respirator Selection & Seal",
+      "summary": "Use certified N95, FFP2, or KF94 respirators. Ensure both headbands are properly placed and press the metal nose strip firmly against the nasal bridge to prevent fogging and side leakage. A respirator without an airtight seal loses over 60% of filtration efficacy.",
+      "source_hint": "NIOSH / CDC Workplace Health & Safety Standards",
+      "confidence": "high"
+    },
+    "cooking_chimney": {
+      "title": "Indoor Cooking Source Mitigation",
+      "summary": "Turn on kitchen exhaust chimneys or fans at least 1 minute before lighting the stove and keep them running 5-10 minutes after turning off the burner. Cooking unvented oils generates significant indoor ultrafine particles and nitrogen dioxide.",
+      "source_hint": "WHO Indoor Air Quality Guidelines: Household Fuel Combustion",
+      "confidence": "high"
+    },
+    "houseplants_myth": {
+      "title": "Myth: Houseplants Clean Winter Smog",
+      "summary": "Myth-buster: Common houseplants do not meaningfully remove fine PM2.5 or combat urban smog in real-world homes. Scientific studies show you would need 10 to 100 plants per square meter to match the filtration speed of a single air exchange or basic filter.",
+      "source_hint": "Journal of Exposure Science & Environmental Epidemiology (2020 review)",
+      "confidence": "high"
+    },
+    "steam_myth": {
+      "title": "Myth: Steam Inhalation Clears Smog From Lungs",
+      "summary": "Myth-buster: Inhaling hot steam does not remove PM2.5 particles from lungs. Inhaled fine particulates penetrate deeply into alveoli and bloodstream where steam cannot reach. Excessive hot steam can cause airway thermal irritation without clearing pollution.",
+      "source_hint": "Chest / American Thoracic Society clinical reviews",
+      "confidence": "high"
+    },
+    "cloth_masks_myth": {
+      "title": "Myth: Cloth & Surgical Masks Block PM2.5",
+      "summary": "Myth-buster: Cloth bandanas, scarves, and loose surgical masks offer little protection against microscopic PM2.5 particles. Woven cloth pores are hundreds of times larger than fine particulate matter; only electrostatic melt-blown filter media (N95/FFP2) captures them.",
+      "source_hint": "Aerosol Science and Technology filtration tests",
+      "confidence": "high"
+    },
+    "diy_filter": {
+      "title": "DIY Box-Fan Filter (Corsi-Rosenthal Box)",
+      "summary": "A standard box fan securely taped to a MERV-13 furnace filter creates an effective, low-cost air cleaner for bedrooms. This design provides high clean air delivery rates at a fraction of commercial purifier costs.",
+      "source_hint": "UC Davis Air Quality Research Center",
+      "confidence": "high"
+    },
+    "generators": {
+      "title": "Diesel Generator Emission Management",
+      "summary": "Diesel generator sets (DG sets) running without particulate filters emit dense black carbon and toxic aromatics directly at ground level. RWA communities should optimize grid backup and maintain strict scheduled filter servicing.",
+      "source_hint": "CPCB Comprehensive Environmental Pollution Index (CEPI)",
+      "confidence": "high"
+    }
+  }
+}

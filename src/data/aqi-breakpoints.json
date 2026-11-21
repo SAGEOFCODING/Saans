@@ -1,0 +1,29 @@
+{
+  "_source": "CPCB National Air Quality Index (NAQI) Breakpoint Standards (2014)",
+  "categories": [
+    { "slug": "good", "name": "Good", "aqiLow": 0, "aqiHigh": 50 },
+    { "slug": "satisfactory", "name": "Satisfactory", "aqiLow": 51, "aqiHigh": 100 },
+    { "slug": "moderate", "name": "Moderate", "aqiLow": 101, "aqiHigh": 200 },
+    { "slug": "poor", "name": "Poor", "aqiLow": 201, "aqiHigh": 300 },
+    { "slug": "very-poor", "name": "Very Poor", "aqiLow": 301, "aqiHigh": 400 },
+    { "slug": "severe", "name": "Severe", "aqiLow": 401, "aqiHigh": 500 }
+  ],
+  "breakpoints": {
+    "pm25": [
+      { "cLow": 0, "cHigh": 30, "iLow": 0, "iHigh": 50, "category": "good" },
+      { "cLow": 31, "cHigh": 60, "iLow": 51, "iHigh": 100, "category": "satisfactory" },
+      { "cLow": 61, "cHigh": 90, "iLow": 101, "iHigh": 200, "category": "moderate" },
+      { "cLow": 91, "cHigh": 120, "iLow": 201, "iHigh": 300, "category": "poor" },
+      { "cLow": 121, "cHigh": 250, "iLow": 301, "iHigh": 400, "category": "very-poor" },
+      { "cLow": 251, "cHigh": 380, "iLow": 401, "iHigh": 500, "category": "severe" }
+    ],
+    "pm10": [
+      { "cLow": 0, "cHigh": 50, "iLow": 0, "iHigh": 50, "category": "good" },
+      { "cLow": 51, "cHigh": 100, "iLow": 51, "iHigh": 100, "category": "satisfactory" },
+      { "cLow": 101, "cHigh": 250, "iLow": 101, "iHigh": 200, "category": "moderate" },
+      { "cLow": 251, "cHigh": 350, "iLow": 201, "iHigh": 300, "category": "poor" },
+      { "cLow": 351, "cHigh": 430, "iLow": 301, "iHigh": 400, "category": "very-poor" },
+      { "cLow": 431, "cHigh": 510, "iLow": 401, "iHigh": 500, "category": "severe" }
+    ]
+  }
+}

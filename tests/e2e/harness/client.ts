@@ -239,6 +239,15 @@ export function isRouteImplemented(routePath: string): boolean {
 }
 
 /**
+ * Checks whether a given domain module is currently implemented on disk.
+ */
+export function isDomainModuleImplemented(moduleName: string): boolean {
+  const tsPath = path.resolve(process.cwd(), `src/domain/${moduleName}.ts`);
+  const jsPath = path.resolve(process.cwd(), `src/domain/${moduleName}.js`);
+  return fs.existsSync(tsPath) || fs.existsSync(jsPath);
+}
+
+/**
  * Consumes and parses a Server-Sent Events (SSE) ReadableStream into an array of typed events.
  */
 export async function readSSEStream(response: Response): Promise<SSEMessage[]> {
@@ -251,6 +260,7 @@ export async function readSSEStream(response: Response): Promise<SSEMessage[]> {
   const decoder = new TextDecoder();
   let buffer = '';
   const messages: SSEMessage[] = [];
+  let currentEvent = 'message';
 
   try {
     while (true) {
@@ -261,7 +271,6 @@ export async function readSSEStream(response: Response): Promise<SSEMessage[]> {
       const lines = buffer.split('\n');
       buffer = lines.pop() || '';
 
-      let currentEvent = 'message';
       for (const line of lines) {
         const trimmed = line.trim();
         if (!trimmed) {
@@ -283,12 +292,15 @@ export async function readSSEStream(response: Response): Promise<SSEMessage[]> {
             event: currentEvent,
             data: parsedData,
           });
+          currentEvent = 'message';
         }
       }
     }
 
     if (buffer.trim()) {
-      if (buffer.startsWith('data:')) {
+      if (buffer.startsWith('event:')) {
+        currentEvent = buffer.slice(6).trim();
+      } else if (buffer.startsWith('data:')) {
         const rawData = buffer.slice(5).trim();
         let parsedData: unknown = rawData;
         try {
@@ -297,9 +309,10 @@ export async function readSSEStream(response: Response): Promise<SSEMessage[]> {
           parsedData = rawData;
         }
         messages.push({
-          event: 'message',
+          event: currentEvent,
           data: parsedData,
         });
+        currentEvent = 'message';
       }
     }
   } finally {

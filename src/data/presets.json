@@ -1,0 +1,122 @@
+{
+  "priya": {
+    "id": "priya",
+    "name": "Priya",
+    "age": 34,
+    "tagline": "Family with infant & elderly in mid-floor apartment",
+    "household": {
+      "members": [
+        { "band": "adult" },
+        { "band": "infant", "sensitive": true },
+        { "band": "senior" },
+        { "band": "senior" }
+      ],
+      "home": {
+        "type": "apartment",
+        "floor": "mid",
+        "windows": "leaky",
+        "ac": true,
+        "purifier": "none",
+        "cooking": "png",
+        "chimney": false
+      },
+      "mobility": {
+        "mode": "car-recirc",
+        "distance": "mid",
+        "wfhDays": 2,
+        "schoolAge": false,
+        "exercisesOutdoors": false
+      },
+      "budget": "mid",
+      "lang": "en"
+    }
+  },
+  "mehta": {
+    "id": "mehta",
+    "name": "Mr. Mehta",
+    "age": 68,
+    "tagline": "Retired senior with asthma and outdoor walking habit",
+    "household": {
+      "members": [
+        { "band": "senior", "sensitive": true }
+      ],
+      "home": {
+        "type": "house",
+        "floor": "low",
+        "windows": "leaky",
+        "ac": false,
+        "purifier": "none",
+        "cooking": "lpg",
+        "chimney": false
+      },
+      "mobility": {
+        "mode": "walk",
+        "distance": "short",
+        "wfhDays": 0,
+        "schoolAge": false,
+        "exercisesOutdoors": true
+      },
+      "budget": "mid",
+      "lang": "en"
+    }
+  },
+  "rohan": {
+    "id": "rohan",
+    "name": "Rohan",
+    "age": 22,
+    "tagline": "Student commuter on two-wheeler with tight budget",
+    "household": {
+      "members": [
+        { "band": "adult" }
+      ],
+      "home": {
+        "type": "apartment",
+        "floor": "mid",
+        "windows": "leaky",
+        "ac": false,
+        "purifier": "none",
+        "cooking": "lpg",
+        "chimney": false
+      },
+      "mobility": {
+        "mode": "two-wheeler",
+        "distance": "long",
+        "wfhDays": 0,
+        "schoolAge": false,
+        "exercisesOutdoors": false
+      },
+      "budget": "low",
+      "lang": "en"
+    }
+  },
+  "anil": {
+    "id": "anil",
+    "name": "Anil",
+    "age": 45,
+    "tagline": "RWA Secretary managing community smog action for 120 flats",
+    "household": {
+      "members": [
+        { "band": "adult" },
+        { "band": "child" }
+      ],
+      "home": {
+        "type": "apartment",
+        "floor": "mid",
+        "windows": "tight",
+        "ac": true,
+        "purifier": "living",
+        "cooking": "png",
+        "chimney": true
+      },
+      "mobility": {
+        "mode": "car-recirc",
+        "distance": "short",
+        "wfhDays": 3,
+        "schoolAge": true,
+        "exercisesOutdoors": false
+      },
+      "budget": "mid",
+      "lang": "en"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "stagnation": {
+    "windKmhMax": 6.0,
+    "tempCMax": 12.0,
+    "rhMinPct": 60.0,
+    "nightEarlyHours": [20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7]
+  },
+  "delhiNcr": {
+    "latMin": 28.1,
+    "latMax": 28.95,
+    "lonMin": 76.7,
+    "lonMax": 77.55,
+    "cities": ["New Delhi", "Delhi", "Noida", "Gurugram", "Ghaziabad", "Faridabad", "Greater Noida"]
+  },
+  "grapStages": [
+    {
+      "stage": 1,
+      "name": "Stage I — Poor Air Quality",
+      "aqiMin": 201,
+      "aqiMax": 300,
+      "summary": "Strict enforcement of dust control at construction; ban on open municipal solid waste and biomass burning; regular mechanical road sweeping.",
+      "hint": "Check local municipal advisories for dust control compliance."
+    },
+    {
+      "stage": 2,
+      "name": "Stage II — Very Poor Air Quality",
+      "aqiMin": 301,
+      "aqiMax": 400,
+      "summary": "Ban on unregulated diesel generator sets (except essential services); enhanced metro and bus frequency; increased parking fees to discourage private vehicle use.",
+      "hint": "Check official notices on DG set restrictions and public transport schedules."
+    },
+    {
+      "stage": 3,
+      "name": "Stage III — Severe Air Quality",
+      "aqiMin": 401,
+      "aqiMax": 450,
+      "summary": "Ban on plying BS-III petrol and BS-IV diesel 4-wheelers; complete halt on non-essential construction and demolition; advisories for online primary classes.",
+      "hint": "Check traffic police and transport department circulars for vehicle bans."
+    },
+    {
+      "stage": 4,
+      "name": "Stage IV — Severe+ Air Quality",
+      "aqiMin": 451,
+      "aqiMax": 500,
+      "summary": "Prohibition of entry for non-essential diesel trucks; halt on public infrastructure projects; 50% work-from-home advisory for public and private offices.",
+      "hint": "Check state disaster management emergency circulars."
+    }
+  ],
+  "seasons": [
+    {
+      "id": "winter-stubble",
+      "name": "Post-Monsoon & Stubble Burning Smog",
+      "startMonth": 10,
+      "startDay": 15,
+      "endMonth": 11,
+      "endDay": 30,
+      "hint": "Agricultural residue fires in northwest plains combined with dropping wind speeds trap dense smoke at breathing height."
+    },
+    {
+      "id": "winter-inversion",
+      "name": "Peak Winter Inversion & Dense Fog",
+      "startMonth": 12,
+      "startDay": 1,
+      "endMonth": 1,
+      "endDay": 31,
+      "hint": "Shallow boundary layer height, cold nocturnal radiation inversions, and high humidity trap vehicular and cooking emissions near the surface."
+    },
+    {
+      "id": "late-winter",
+      "name": "Late Winter Transition",
+      "startMonth": 2,
+      "startDay": 1,
+      "endMonth": 2,
+      "endDay": 28,
+      "hint": "Gradual daytime solar heating raises boundary layer, though calm night inversions still yield poor morning air."
+    },
+    {
+      "id": "summer-monsoon",
+      "name": "Summer Dust & Monsoon Cleansing",
+      "startMonth": 3,
+      "startDay": 1,
+      "endMonth": 10,
+      "endDay": 14,
+      "hint": "Stronger convective winds disperse fine particulates; seasonal monsoon rains provide atmospheric wet scavenging."
+    }
+  ]
+}

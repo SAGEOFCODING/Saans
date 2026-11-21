@@ -32,9 +32,15 @@ function getShellExecutable(): string {
  */
 export function runSizeGuardScript(
   cwd: string = process.cwd(),
-  env: NodeJS.ProcessEnv = process.env
+  env: NodeJS.ProcessEnv = process.env,
+  scriptPathOverride?: string
 ): CliResult {
-  const scriptPath = path.resolve(cwd, 'scripts/check-size.sh');
+  const repoScriptPath = path.resolve(process.cwd(), 'scripts/check-size.sh');
+  const scriptPath =
+    scriptPathOverride ||
+    (fs.existsSync(path.resolve(cwd, 'scripts/check-size.sh'))
+      ? path.resolve(cwd, 'scripts/check-size.sh')
+      : repoScriptPath);
   const shell = getShellExecutable();
 
   // Normalize path with forward slashes for bash/sh

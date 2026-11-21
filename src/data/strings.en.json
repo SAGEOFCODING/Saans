@@ -1,0 +1,48 @@
+{
+  "app": {
+    "title": "Saans",
+    "subtitle": "Clean-Air Copilot for Winter Smog",
+    "tagline": "Protect your family and community with grounded daily clean-air choices.",
+    "rulesModeBanner": "Running in rules-only mode"
+  },
+  "emergency": {
+    "careLine": "If you or someone with you has trouble breathing, chest pain, fainting or severe symptoms, seek urgent medical care now. Call your local emergency number."
+  },
+  "categories": {
+    "good": "Good",
+    "satisfactory": "Satisfactory",
+    "moderate": "Moderate",
+    "poor": "Poor",
+    "very-poor": "Very Poor",
+    "severe": "Severe"
+  },
+  "riskTiers": {
+    "0": "Air quality is good. Normal outdoor activities pose no health risk.",
+    "1": "Air quality is satisfactory. Sensitive individuals should observe minor symptoms.",
+    "2": "Air quality is moderate. Sensitive members should avoid prolonged outdoor exertion.",
+    "3": "Air quality is poor. Limit prolonged outdoor exertion; keep windows closed during smog peaks.",
+    "4": "Air quality is very poor. Avoid outdoor exertion; run indoor filtration and wear a fitted N95 respirator.",
+    "5": "Air quality is severe emergency smog. Remain indoors with air filtration running; avoid outdoor activity."
+  },
+  "templateNarration": {
+    "headlineGood": "Clean Air Day Ahead",
+    "headlineSatisfactory": "Acceptable Air Quality Today",
+    "headlineModerate": "Moderate Air Quality Expected",
+    "headlinePoor": "Poor Air Alert: Take Precautions",
+    "headlineVeryPoor": "Very Poor Air Alert: Minimize Outdoor Exposure",
+    "headlineSevere": "Severe Smog Emergency: High Protection Required",
+    "summaryPrefix": "Current air quality is classified as",
+    "summaryReduction": "Following the recommended plan can reduce your household's peak particulate intake by approximately",
+    "disclaimer": "All impact numbers are heuristic planning estimates based on atmospheric and filtration models, not medical guarantees."
+  },
+  "common": {
+    "aqi": "AQI",
+    "pm25": "PM2.5",
+    "pm10": "PM10",
+    "unitUgM3": "µg/m³",
+    "bestWindow": "Best Air Window",
+    "worstWindow": "Worst Air Window",
+    "estimatedReduction": "Est. Exposure Reduction",
+    "carbonSaved": "Est. CO2e Saved"
+  }
+}

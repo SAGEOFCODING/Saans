@@ -1,0 +1,67 @@
+{
+  "_note": "Heuristic planning values, ILLUSTRATIVE. Cite in source_hint; do not hardcode elsewhere.",
+  "indoorInfiltration": {
+    "windowsOpen": 0.9,
+    "closed": 0.6,
+    "closed+purifier": 0.3,
+    "sealed+purifier": 0.22
+  },
+  "commute": {
+    "walk": 1.1,
+    "two-wheeler": 1.2,
+    "auto": 1.1,
+    "bus": 0.9,
+    "metro": 0.7,
+    "car-recirc": 0.5,
+    "car-open": 1.0
+  },
+  "activity": {
+    "rest": 1.0,
+    "light": 1.2,
+    "exercise": 2.2
+  },
+  "protection": {
+    "none": 1.0,
+    "surgical": 0.85,
+    "n95-fitted": 0.25
+  },
+  "indoorSources": {
+    "biomass-cooking": 40,
+    "incense": 25,
+    "gas-cooking-no-chimney": 15
+  },
+  "emissionsKgCO2ePerKm": {
+    "petrol-car": 0.17,
+    "two-wheeler": 0.04,
+    "bus-pax": 0.03,
+    "metro-pax": 0.03,
+    "ev-two-wheeler": 0.02
+  },
+  "referenceDayExposure": 1440,
+  "sources": {
+    "indoorInfiltration": {
+      "source_hint": "LBNL & ASHRAE infiltration studies; IIT Kanpur indoor air modeling (2020)",
+      "confidence": "medium"
+    },
+    "commute": {
+      "source_hint": "CSE India transit particulate exposure measurement study (2019)",
+      "confidence": "medium"
+    },
+    "activity": {
+      "source_hint": "US EPA minute ventilation volume ratios by metabolic activity rate",
+      "confidence": "high"
+    },
+    "protection": {
+      "source_hint": "NIOSH / 3M workplace filtration efficacy studies for certified N95 respirators",
+      "confidence": "high"
+    },
+    "indoorSources": {
+      "source_hint": "Lancet Planetary Health residential biomass & LPG cooking emission increments",
+      "confidence": "medium"
+    },
+    "emissionsKgCO2ePerKm": {
+      "source_hint": "India GHG Program / CEA CO2 baseline database for Indian transport",
+      "confidence": "high"
+    }
+  }
+}
