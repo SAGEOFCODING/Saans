@@ -78,7 +78,7 @@
     "effort": 1,
     "cost": "free",
     "confidence": "high",
-    "protective": false
+    "protective": true
   },
   {
     "id": "ventilate-best-window",
