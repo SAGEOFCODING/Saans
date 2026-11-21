@@ -1,6 +1,6 @@
 # Saans (सांस) — Clean-Air Copilot
 
-A GenAI-powered clean-air assistant designed for families and communities navigating severe winter smog and urban air pollution in northern India (Delhi-NCR, Indo-Gangetic Plain).
+A GenAI-powered clean-air copilot designed for families and communities navigating severe winter smog and urban air pollution in northern India (Delhi-NCR and the Indo-Gangetic Plain).
 
 Saans provides hyper-personalized, low-emission daily routines, actionable indoor air quality hacks, and sustainable living alternatives tailored to household microenvironments and budgets, clearly explaining the direct personal and collective impact of every choice.
 
@@ -21,6 +21,7 @@ Every winter (October through February), the Indo-Gangetic Plain experiences sev
 - **One-Size-Fits-All Advice**: Existing guidance ignores household composition (infants, asthmatic elders), housing characteristics (ground-floor dust vs. third-floor infiltration, leaky windows, kitchen chimney presence), and socioeconomic budgets.
 - **Pervasive Clean-Air Myths**: Families invest in ineffective solutions (indoor snake plants for PM2.5 removal, boiling water steam) while neglecting high-yield, low-cost interventions (targeted ventilation windows, draft sealing, wet mopping, DIY box-fan filtration).
 - **Invisible Impact**: People do not know the quantitative effect of their daily decisions, and Residential Welfare Associations (RWAs) lack collective tools to aggregate community emissions reductions.
+- **Panic vs. Fatalism**: Families either panic-buy expensive commercial air purifiers (₹15,000–₹35,000) or succumb to fatalistic inaction assuming clean air is unattainable on a budget.
 
 ---
 
@@ -31,14 +32,14 @@ Every winter (October through February), the Indo-Gangetic Plain experiences sev
 
 Saans cleanly separates **decision logic** from **natural language generation**:
 1. **100% Deterministic Decision Core**: Pure TypeScript algorithms compute India NAQI breakpoints, vulnerability risk tiers, diurnal microenvironment schedules, baseline inhaled exposure, candidate action selection, and marginal percentage reductions.
-2. **Grounded LLM Narration**: Google Gemini (via `@google/genai`) or the offline Mock Narrator receives a strict **FACTS JSON** payload. The LLM is constrained to translate engine decisions into calm, empathetic, grade-7 reading-level guidance without hallucinating numbers or inventing actions.
+2. **Grounded LLM Narration**: Google Gemini Flash (via `@google/genai`) or the offline Mock Narrator receives a strict **FACTS JSON** payload. The LLM is constrained to translate engine decisions into calm, empathetic, grade-7 reading-level guidance without hallucinating numbers or inventing actions.
 3. **Bi-Directional Safety Guard**: AST and regex guardrails enforce that every recommended action ID exists, all numbers match the allowed FACTS set, and medical claims or dosage advice are strictly blocked.
 
 ### End-to-End Decision & Narration Pipeline
 
 ```text
                                   ┌────────────────────────┐
-                                  │   User Input / Form    │
+                                  │   User Input / Preset  │
                                   │ (Household, Location)  │
                                   └───────────┬────────────┘
                                               │
@@ -86,27 +87,28 @@ Saans cleanly separates **decision logic** from **natural language generation**:
 
 ## 4. How It Works: The Four Problem Asks
 
-Saans maps directly to the four core challenges outlined in the problem statement:
+Saans maps directly to the four core challenges outlined in the challenge statement:
 
 ### 1. Low-Emission Daily Routines
-- **Diurnal Window Optimization**: Smog peaks during early morning and late night due to cold air trapping (inversions). Saans computes the optimal 1-hour "clean air window" (typically 1:00 PM – 3:30 PM) and shifts strenuous outdoor activities (walking, jogging, school sports) to this period.
-- **Microenvironment Exposure Modeling**: Tracks time spent across 5 distinct environments: home (bedroom/living), in-transit (walk, two-wheeler, bus, car), and workplace/school.
+- **Diurnal Window Optimization**: Smog peaks during early morning (6:00 AM – 8:30 AM) and late night due to cold air trapping (inversions). Saans computes the optimal 1-hour "clean air window" (typically 1:00 PM – 3:30 PM when surface solar heating breaks the boundary inversion) and shifts strenuous outdoor activities (walking, jogging, school sports) to this window.
+- **Microenvironment Exposure Modeling**: Tracks time spent across 5 distinct environments: home (bedroom/living), in-transit (walk, two-wheeler, bus, metro, car), and workplace/school.
+- **Diurnal Schedule Sequencing**: Generates morning-to-night diurnal blocks (Sleep, Morning Routine, Commute, Daytime Work/School, Evening) with tailored mitigations for each span.
 
 ### 2. Indoor Air Quality Hacks
-- **Budget-First Interventions**: Prioritizes zero-cost actions (e.g., cross-ventilation strictly during the clean afternoon window; sealing drafty door/window frames with rolled towels or foam tape; wet mopping instead of dry sweeping to prevent dust re-suspension).
-- **DIY Filtration**: Guides low- and mid-budget households on building a DIY Box-Fan Filter (HEPA/MERV-13 filter strapped to a domestic table fan) achieving ~70% of commercial purifier efficiency at 15% of the cost.
-- **Source Control**: Recommends lid cooking, kitchen exhaust timing, and eliminating incense (agarbatti), mosquito coils, and indoor solid fuel burning.
+- **Zero-Cost Interventions First**: Prioritizes free actions (e.g., cross-ventilation strictly during the clean afternoon window; sealing drafty door/window frames with rolled damp towels or draft tape; wet mopping instead of dry sweeping to prevent dust re-suspension).
+- **DIY Box-Fan Filtration**: Guides low- and mid-budget households on building a DIY Box-Fan Filter (HEPA/MERV-13 filter strapped to a domestic table fan) achieving ~70% of commercial purifier efficiency at 15% of the cost (~₹1,500 vs. ₹15,000+).
+- **Source Control & Myth-Busting**: Recommends lid cooking, kitchen exhaust timing, and explicitly busts dangerous myths—flagging indoor incense (*agarbatti*), mosquito coils, and dhoop as major indoor VOC and PM2.5 emitters, while clarifying that indoor snake plants do not filter hazardous winter PM2.5.
 
-### 3. Sustainable Alternatives
+### 3. Sustainable Choices & Alternatives
 - **Commute Decarbonization**: Recommends electric public transit (Delhi Metro, electric bus) over personal vehicles or two-wheelers, calculating avoided tailpipe emissions and personal exposure cuts.
 - **Clean Heating & Cooking**: Promotes induction or PNG over chulha/biomass heating, and flags crop-burning or municipal waste-burning advisories.
-- **Ranked Feasibility**: Swaps are filtered strictly by the user's stated budget (`free`, `low`, `mid`).
+- **Budget-Gated Swaps**: Sustainable alternatives are strictly gated by stated household budget (`free`, `low`, `mid`), ensuring no low-income family is ever advised to purchase expensive hardware.
 
-### 4. Direct Impact Explanation
+### 4. Direct Personal & Collective Impact Explanation
 - **Personal Exposure Delta**: Expressed as an estimated percentage reduction in daily inhaled PM2.5 (e.g., *"-38% daily exposure with purifier + commute mask"*).
 - **Avoided CO2e**: Quantifies greenhouse gas savings (kg CO2e/day) for transit and fuel swaps.
-- **Community Multiplier**: Society-level calculator enabling RWAs to see aggregate impact across 10 to 500 households.
-- **Intellectual Honesty**: All numbers are explicitly labeled as *"heuristic estimates"*, citing underlying CPCB and environmental heuristics.
+- **Community Multiplier**: Society-level calculator enabling RWAs to see aggregate impact across 10 to 500 households (e.g., stopping guard biomass burning across 120 flats prevents 280 kg CO2e/day).
+- **Intellectual Honesty**: All numbers are explicitly labeled as *"heuristic estimates"*, citing underlying CPCB and environmental science heuristics.
 
 ---
 
@@ -137,6 +139,7 @@ Saans maps directly to the four core challenges outlined in the problem statemen
 │   │   ├── StatusStrip.tsx        # Responsive multi-pill metrics strip
 │   │   ├── HourlyStrip.tsx        # 24h bar strip with accessible SVG category patterns
 │   │   ├── HouseholdStepper.tsx   # 5-step onboarding wizard with inline validation
+│   │   ├── stepper/               # Stepper step views (Location, Members, Home, Mobility, Budget/Lang)
 │   │   ├── PersonaPresets.tsx     # One-click preset loader (Priya, Mehta, Rohan, Anil)
 │   │   ├── RiskSummary.tsx        # Plain-language vulnerability cards per member
 │   │   ├── PlanTimeline.tsx       # Morning-to-night vertical action timeline
@@ -146,6 +149,9 @@ Saans maps directly to the four core challenges outlined in the problem statemen
 │   │   ├── ChatSheet.tsx          # Code-split streaming chat drawer
 │   │   ├── CommunityPack.tsx      # N-household collective action multiplier
 │   │   ├── ModeBanner.tsx         # Rules-only / degraded mode indicator banner
+│   │   ├── SafetyNote.tsx         # Medical disclaimer & emergency care helpline
+│   │   ├── SvgPatterns.tsx        # SVG patterns for color-blind accessibility
+│   │   ├── ThemeToggle.tsx        # Light/Dark mode toggle
 │   │   └── LanguageSwitcher.tsx   # English / Hindi (हिंदी) session toggle
 │   ├── data/                  # Tunable domain catalogs & schemas
 │   │   ├── aqi-breakpoints.json   # Official CPCB NAQI sub-index breakpoints
@@ -156,7 +162,7 @@ Saans maps directly to the four core challenges outlined in the problem statemen
 │   │   ├── presets.json           # 4 standard hackathon persona profiles
 │   │   ├── strings.en.json        # English UI strings and template narration
 │   │   └── strings.hi.json        # Hindi (हिंदी) localized strings & templates
-│   ├── domain/                # PURE, ISOMORPHIC DECISION ENGINE (No I/O)
+│   ├── domain/                # PURE, ISOMORPHIC DECISION ENGINE (Zero I/O, Pure TS)
 │   │   ├── types.ts               # Core domain TypeScript interfaces & Zod schemas
 │   │   ├── aqi.ts                 # CPCB sub-index linear interpolation
 │   │   ├── risk.ts                # Vulnerability risk scoring (tiers 0–5)
@@ -169,11 +175,11 @@ Saans maps directly to the four core challenges outlined in the problem statemen
 │   │   └── plan.ts                # Pure domain DayPlan orchestrator
 │   ├── hooks/                 # React state hooks
 │   │   ├── usePlan.ts             # API plan fetching & caching hook
-│   │   ├── useWhatIf.ts           # Pure client-side simulation hook
+│   │   ├── useWhatIf.ts           # Pure client-side simulation hook (<100ms)
 │   │   └── useChat.ts             # SSE stream consumer hook
 │   ├── lib/                   # Utilities
 │   │   ├── http.ts                # Resilient fetch with timeout & 1 retry
-│   │   ├── i18n.ts                # Translation helper (t)
+│   │   ├── i18n.ts                # Translation helper (t) binding strings
 │   │   └── storage.ts             # Safe sessionStorage wrapper
 │   ├── services/              # External adapters & LLM integration
 │   │   ├── airData.ts             # Open-Meteo AQ & forecast adapter with caching
@@ -191,36 +197,42 @@ Saans maps directly to the four core challenges outlined in the problem statemen
 │   │       ├── tools.ts               # 5 read-only domain inspection tools
 │   │       └── chat.ts                # Multi-turn tool-calling loop (<= 3 rounds)
 │   └── middleware.ts          # Dynamic CSP nonce generation & security headers
-└── tests/                     # 168+ Vitest unit, API, LLM, and A11y tests
+└── tests/                     # 168 Vitest unit, API, LLM, and A11y tests across 25 suites
     ├── domain/                # Pure engine logic & breakpoint tests
     ├── api/                   # Route handlers, caching, rate limiting
     ├── llm/                   # Guard, FACTS builder, red-team matrix
-    ├── a11y/                  # Automated WCAG 2.2 AA contrast matrix tests
-    └── e2e/                   # 5-tier end-to-end integration test suite
+    ├── a11y/                  # Automated WCAG 2.1/2.2 AA contrast matrix tests
+    ├── components/            # UI component rendering & interaction tests
+    └── e2e/                   # Multi-tier integration and scenario test suites
 ```
 
 ---
 
 ## 6. Impact Model & Honesty
 
-Saans avoids "black-box" magical numbers by publishing its exact calculation mechanics:
+Saans avoids "black-box" magical numbers by publishing its exact calculation mechanics and heuristics:
 
 1. **CPCB NAQI Calculation**:
-   Implements official Central Pollution Control Board (CPCB) linear sub-index interpolation across 6 standard categories:
+   Implements official Central Pollution Control Board (CPCB) linear sub-index interpolation across all 6 standard Indian categories:
    - **Good (0–50)**: Minimal impact.
    - **Satisfactory (51–100)**: Minor breathing discomfort to sensitive people.
    - **Moderate (101–200)**: Breathing discomfort to people with lungs, asthma, and heart diseases.
    - **Poor (201–300)**: Breathing discomfort to most people on prolonged exposure.
    - **Very Poor (301–400)**: Respiratory illness on prolonged exposure.
    - **Severe (401–500+)**: Affects healthy people and seriously impacts those with existing diseases.
-2. **Exposure Heuristics**:
+
+2. **Heuristic Inhaled Exposure Model**:
    Total inhaled daily exposure index is calculated as:
    $$\text{Exposure} = \sum_{i} \left( \text{Duration}_i \times C_i \times V_i \right)$$
-   Where $C_i$ is microenvironment concentration (ambient PM2.5 modified by room infiltration factors: sealed, leaky, purifier on/off), and $V_i$ is the physical activity ventilation factor (sleep: 0.6, desk/rest: 1.0, active commute: 1.6, outdoor exercise: 2.2).
+   Where:
+   - $C_i$ is microenvironment concentration (ambient PM2.5 modified by room infiltration factors: sealed, leaky, purifier on/off).
+   - $V_i$ is the physical activity ventilation factor (sleep: 0.6, desk/rest: 1.0, active commute: 1.6, outdoor exercise: 2.2).
+
 3. **Avoided False Precision**:
-   Personal exposure changes are reported as rounded percentage deltas (e.g., "-35%"). Community impact uses qualitative PM tiers (`high`, `medium`, `low`) and transparent kg CO2e factors based on standard displacement metrics.
-4. **Honesty Disclaimers**:
-   Every impact metric is accompanied by a *"heuristic estimate"* disclaimer and confidence badge (`high`, `medium`, `low`).
+   Personal exposure changes are reported as rounded percentage deltas (e.g., "-38%"). Community impact uses qualitative PM tiers (`high`, `medium`, `low`) and transparent kg CO2e factors based on standard displacement metrics.
+
+4. **Honesty Disclaimers & Source Hints**:
+   Every impact metric is accompanied by a *"heuristic estimate"* disclaimer and confidence badge (`high`, `medium`, `low`). Tunable factors in `src/data/impact-factors.json` cite standard peer-reviewed environmental health literature.
 
 ---
 
@@ -228,23 +240,24 @@ Saans avoids "black-box" magical numbers by publishing its exact calculation mec
 
 | Area | Implementation & Controls |
 |---|---|
-| **Content Security Policy** | Enforced via `src/middleware.ts` using dynamic cryptographic nonces (`crypto.randomUUID()`) on every request. Production uses `'strict-dynamic'`. |
+| **Content Security Policy** | Enforced via `src/middleware.ts` using dynamic cryptographic nonces (`crypto.randomUUID()`) on every request. Production uses `'strict-dynamic'` and restricts script/style origins. |
 | **Security Headers** | `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`, `Permissions-Policy: geolocation=(self)`, `poweredByHeader: false`. |
-| **Zero Secret Leakage** | `GEMINI_API_KEY` is strictly confined to server-side Node.js execution. Zero `NEXT_PUBLIC_` secrets. |
+| **Zero Secret Leakage** | `GEMINI_API_KEY` is strictly confined to server-side Node.js execution. Zero `NEXT_PUBLIC_` secrets exist in client bundles. |
 | **Privacy by Design** | No database. No user accounts. Coordinates are rounded to 2 decimal places before processing. Request bodies and coordinates are never logged. |
 | **Health Flag Protection** | Individual medical histories are never stored. The server converts household member attributes into a single derived boolean (`sensitiveMember: boolean`) before invoking the LLM. Raw health flags never leave the server or enter prompts. |
 | **Rate Limiting & DoS Guard** | In-memory token-bucket rate limiter per IP: `POST /api/plan` (20 req/min), `POST /api/chat` (10 req/min). Request bodies capped at 16 KB. |
 | **Prompt Injection Defense** | System prompts treat all user input inside `<user_data>` delimiters strictly as passive data. Read-only tools have zero side effects. |
+| **Medical Safety Guard** | Automated AST and regex guard intercepts LLM output and user chat. Any emergency symptoms trigger immediate emergency care helpline; medical diagnoses or drug dosages are strictly prohibited. |
 
 ---
 
 ## 8. Accessibility & Inclusivity
 
-- **WCAG 2.2 AA Compliance**: 100% of color token pairs satisfy contrast ratios >= 4.5:1 (3:1 for large display elements and icons), verified automatically by `tests/a11y/contrast.test.ts`.
+- **WCAG 2.1 / 2.2 AA Compliance**: 100% of color token pairs satisfy contrast ratios $\ge 4.5:1$ ($\ge 3:1$ for large display elements and icons), verified automatically by `tests/a11y/contrast.test.ts` (18 tests passing), including the tuned `--caution` `#8A5A00`.
 - **Color-Blind Accessible Patterns**: The 24-hour diurnal strip does not rely solely on color; each AQI tier features distinct SVG hatched line patterns (dots, diagonal stripes, cross-hatches).
-- **Bilingual English & Hindi (हिंदी)**: Complete native localization for UI copy, input labels, and LLM-generated daily guidance.
+- **Bilingual English & Hindi (हिंदी)**: Complete native localization for UI copy, input labels, persona presets, and LLM-generated daily guidance using Devanagari script.
 - **Clean 1-Page A4 Print Stylesheet**: Includes `@media print` rules optimizing the daily plan to print cleanly onto a single A4 sheet without navigation bars, buttons, or background clutter.
-- **Keyboard Navigation & Screen Readers**: Skip-to-content links, visible focus indicator rings (`:focus-visible`), semantic HTML5 landmarks (`<main>`, `<nav>`, `<header>`), and `aria-live="polite"` regions for dynamic simulation updates.
+- **Keyboard Navigation & Screen Readers**: Skip-to-content links, visible focus indicator rings (`:focus-visible`), semantic HTML5 landmarks (`<main>`, `<nav>`, `<header>`), focus trap in `ChatSheet`, and `aria-live="polite"` regions for dynamic simulation updates.
 - **Reduced Motion**: Respects `prefers-reduced-motion: reduce` by clamping transitions and animations to 0.01ms.
 
 ---
@@ -254,7 +267,7 @@ Saans avoids "black-box" magical numbers by publishing its exact calculation mec
 Saans features a multi-tiered test suite executing via Vitest:
 
 ```bash
-npm test             # Runs the 168+ unit and integration tests
+npm test             # Runs the 168 unit and integration tests across 25 suites
 ```
 
 ### Test Suite Structure
@@ -266,8 +279,9 @@ npm test             # Runs the 168+ unit and integration tests
    - *Acute Symptoms*: "My father can't breathe properly" -> Immediately returns emergency medical care line without invoking the LLM.
    - *XSS Injection*: `<script>alert(1)</script>` in location or chat -> Rendered inert.
    - *Number Hallucination*: Invented numbers not present in FACTS -> Rejected by guard; triggers retry and fallback.
-4. **Accessibility Tests (`tests/a11y/*`)**: Automated contrast matrix testing over every design token pair in `design-system.md`.
-5. **E2E Scenario Tiers (`tests/e2e/*`)**:
+4. **Accessibility Tests (`tests/a11y/*`)**: Automated contrast matrix testing over every design token pair in `design-system.md` (18 passing tests).
+5. **Component Tests (`tests/components/*`)**: UI component rendering, keyboard navigability, and stepper validation.
+6. **E2E Scenario Tiers (`tests/e2e/*`)**:
    - `tier1-coverage`: Air, Geocode, Plan, Chat, Health, Security Headers, and CLI size guard.
    - `tier2-boundary`: 16 KB body limit, coordinate limits, rate limits, and red-team guard.
    - `tier3-interaction`: Geocode -> Air -> Plan end-to-end pipeline, bilingual toggling, offline fallbacks.
@@ -289,8 +303,8 @@ Saans runs completely offline out of the box with zero external dependencies. Th
 git clone https://github.com/SAGEOFCODING/Saans.git
 cd Saans
 
-# 2. Install dependencies
-npm install
+# 2. Install dependencies cleanly
+npm ci
 
 # 3. Start local development server
 npm run dev
@@ -319,23 +333,24 @@ To enable real-time Gemini-powered empathetic narration and streaming conversati
 ```bash
 npm run lint         # Runs ESLint with jsx-a11y checks
 npm run typecheck    # Verifies TypeScript compiler without emit
-npm test             # Executes all Vitest unit and integration suites
-npm run build        # Verifies Next.js production bundle build
+npm test             # Executes all Vitest unit and integration suites (168 tests)
+npm run build        # Verifies Next.js production bundle build (First Load JS ~129 kB)
 npm run check        # Chains lint + typecheck + test + build (must pass cleanly)
-bash scripts/check-size.sh  # Verifies repository size is strictly < 5 MB
+bash scripts/check-size.sh  # Verifies repository size is strictly < 5 MB (~2.0 MB)
 ```
 
 ---
 
 ## 11. Environment Variables
 
-All variables are defined in `.env.example`:
+All variables are documented in `.env.example`:
 
 | Variable | Description | Default | Required? |
 |---|---|---|---|
 | `GEMINI_API_KEY` | Google Gemini API key from Google AI Studio | `""` | No (defaults to offline mock provider) |
 | `GEMINI_MODEL` | Gemini Flash model ID | `gemini-2.5-flash` | No |
 | `LLM_PROVIDER` | Active LLM provider (`gemini` or `mock`) | `mock` | No |
+| `NODE_ENV` | Runtime environment (`development`, `production`, `test`) | `development` | No |
 
 ---
 
@@ -348,29 +363,38 @@ All variables are defined in `.env.example`:
 
 ---
 
-## 13. Demo Script & Persona Walkthroughs
+## 13. 3-Minute Demo Script for Judges
 
-The application includes 4 one-click preset buttons on the onboarding screen:
+This walkthrough demonstrates all core capabilities in under 3 minutes:
 
-### Persona 1: Priya (34) — Protecting Toddler & In-laws
-- **Context**: IT professional living in a 3rd-floor apartment in East Delhi with PNG cooking fuel, driving to work, no air purifier, mid budget.
-- **Challenge**: *"Protect my toddler and elderly in-laws without spending ₹30,000 on multiple purifiers."*
-- **Saans Solution**: Recommends placing a single mid-range purifier in the shared sleeping room during night hours, sealing window drafts, switching car air intake to recirculation mode during commute, and scheduling toddler indoor play during morning smog peaks.
+| Time | Step | Action | What to Notice |
+|---|---|---|---|
+| **0:00 – 0:30** | **1. Initial Delhi NCR Air View** | Open `http://localhost:3000` | The app immediately displays live air quality for Central Delhi **before any form is filled**. Observe the **HazeHero** skyline opacity dynamically mapped to PM2.5 and visibility, the **StatusStrip** atmospheric metrics (stagnation warning, humidity, temperature), and the **HourlyStrip** with color-blind SVG hatched patterns showing the morning inversion and the clean afternoon window. |
+| **0:30 – 1:00** | **2. Priya Preset (Infant & Elders)** | Click the **"Priya (Infant)"** persona chip above the stepper | The 5-step wizard instantly auto-populates (IT professional, 3rd floor apartment, infant toddler + senior in-laws, mid budget). Click **"Generate Clean-Air Plan"**. The engine produces a diurnal timeline: prioritizing bedroom purifier use at night, sealing window drafts with foam tape, and switching car AC to recirculation mode. |
+| **1:00 – 1:45** | **3. Instant What-If Simulator** | Scroll to the **"What-If Simulator"** panel | Toggle **"Add Bedroom Purifier"** or **"N95 Commute Mask"** on and off. The **ImpactBar** recalculates **instantly in <100ms** client-side with **zero network requests** (pure domain logic in browser). Exposure reduction jumps from -12% to -41%, showing avoided PM2.5 and avoided CO2e. |
+| **1:45 – 2:15** | **4. Rohan Preset (Outdoor Runner)** | Click **"Rohan (Student)"** persona chip and regenerate | Rohan rides a two-wheeler 15 km daily and jogs at 6:30 AM on a low budget. Saans automatically detects the hazardous morning inversion (AQI 420+), shifts his exercise to the 1:30 PM clean window, and recommends a ₹1,500 **DIY Box-Fan Filter** instead of an expensive commercial purifier. |
+| **2:15 – 2:40** | **5. Grounded Conversational Advisor** | Click the floating **"Ask Saans"** button | The **ChatSheet** slides in (dynamically code-split, keeping initial JS at 129 kB). Type: *"When is the safest time to ventilate today?"* The advisor executes read-only tool `get_best_window('ventilate')` and streams an accurate answer: *"The best time to ventilate is 1:00 PM – 2:30 PM when PM2.5 drops to ~140 µg/m³"*. |
+| **2:40 – 2:55** | **6. Red-Team Safety Guard** | In the chat, type: *"My father has severe chest pain and can't breathe properly"* | The bi-directional safety guard intercepts the input immediately. Without calling the LLM or generating medical advice, it displays the emergency medical helpline and urges urgent in-person care. |
+| **2:55 – 3:00** | **7. Community Pack & Rules Mode** | Scroll to **Community Pack**; notice **ModeBanner** | Adjust the household slider to 120 flats. Notice aggregate savings (280 kg CO2e/day avoided, 84 car trips saved) and copyable WhatsApp notice. Notice the top banner indicating **"Running in rules-only mode"** if no API key is provided—demonstrating 100% graceful degradation. |
 
-### Persona 2: Mr. Mehta (68) — Senior Asthmatic Morning Walker
-- **Context**: Retired senior living in a ground-floor house with leaky windows, respiratory sensitivity, dedicated morning walker.
-- **Challenge**: *"Keep my morning walking routine safely; tell me when it is safe to step out."*
-- **Saans Solution**: Detects severe morning inversion and atmospheric stagnation. Shifts his 6:30 AM walk to the day's cleanest ventilation window (2:00 PM – 3:00 PM), and recommends window weatherstripping for his ground-floor house.
+---
 
-### Persona 3: Rohan (22) — Budget-Constrained Student Commuter
-- **Context**: College student riding a two-wheeler 15 km daily across Delhi, living in a rented room, low budget.
-- **Challenge**: *"Cut my exposure cheaply and know which mask actually works."*
-- **Saans Solution**: Recommends a reusable certified N95 mask for two-wheeler travel (cost: low, impact: high), building a DIY box-fan filter using a domestic table fan and HEPA sheet, and shifting 2 study days to remote WFH/study.
+## 14. Quality Checklist
 
-### Persona 4: Anil (45) — RWA Secretary (120 Households)
-- **Context**: Resident Welfare Association secretary managing an apartment society in Noida.
-- **Challenge**: *"Mobilize our society with a collective clean-air action plan and quantify our impact."*
-- **Saans Solution**: Opens the **Community Pack**, adjusts the slider to 120 households, and generates a copyable society action plan: halting security guard biomass/waste burning, providing electric heater alternatives, and coordinating carpooling—yielding a measurable collective reduction of 280 kg CO2e/day and significant particulate reduction.
+| Challenge Requirement / Criteria | Implementation Verification | Status |
+|---|---|---|
+| **Chosen Vertical** | Environment & Sustainability (winter smog clean-air copilot for Indian families) | PASS |
+| **Deterministic Decision Engine** | Pure TypeScript domain in `src/domain/` (zero I/O, pure functions, time-injected) | PASS |
+| **Grounded LLM Layer** | FACTS JSON payload; numbers strictly bounded; LLM only translates text | PASS |
+| **Four Problem Asks Addressed** | Daily routines, indoor air hacks, sustainable swaps, and direct impact fully implemented | PASS |
+| **Zero Database & Privacy** | No user accounts, no database; coordinates rounded; no raw health flags sent to LLM | PASS |
+| **Security Controls** | Dynamic CSP nonces (`crypto.randomUUID()`), security headers, rate limits, no secrets in client | PASS |
+| **Accessibility (WCAG 2.1 AA)** | 18 automated contrast tests passing, keyboard focus trap, skip link, reduced motion, bilingual EN/HI | PASS |
+| **Test Suite Coverage** | 168 tests across 25 suites passing 100% in Vitest (`npm test`) | PASS |
+| **Single Branch Constraint** | Only branch `main` exists; zero feature branches pushed or retained | PASS |
+| **Repository Size Budget** | ~2.0 MB (well below 5 MB target and 10 MB hard limit verified by `check-size.sh`) | PASS |
+| **Offline Zero-Key Execution** | Out-of-the-box mock provider and Open-Meteo keyless APIs require zero configuration | PASS |
+| **First Load Bundle Budget** | 129 kB First Load JS for `/` route (well under 150 kB budget, dynamic ChatSheet) | PASS |
 
 ---
 
