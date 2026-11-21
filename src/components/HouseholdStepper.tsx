@@ -53,9 +53,9 @@ export function HouseholdStepper({
   };
 
   return (
-    <div className="rounded-panel border border-line/70 bg-surface/95 p-4 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.03)] transition-all">
+    <div className="rounded-panel border border-line/40 bg-surface/85 backdrop-blur-md p-4 sm:p-6 shadow-xs transition-all">
       {/* Header and Step Indicator */}
-      <div className="mb-4 flex items-center justify-between border-b border-line/50 pb-3">
+      <div className="mb-4 flex items-center justify-between border-b border-line/30 pb-3">
         <div>
           <h2 className="text-sm sm:text-base font-bold text-ink tracking-tight">
             {isHi ? 'परिवार का विवरण और दैनिक संदर्भ' : 'Household Profile & Daily Context'}

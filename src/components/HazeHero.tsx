@@ -38,17 +38,17 @@ export function HazeHero({ air, loading, onManualAqiClick, lang = 'en' }: HazeHe
   return (
     <section
       aria-label="Current Air Quality Hero"
-      className="relative overflow-hidden rounded-hero border border-line/60 bg-surface/95 p-5 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all"
+      className="relative overflow-hidden rounded-hero border border-line/40 bg-surface/85 backdrop-blur-md p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all"
     >
       {/* City Horizon Silhouette Canvas */}
-      <div className="relative mb-5 overflow-hidden rounded-panel border border-line/40 shadow-xs">
+      <div className="relative mb-5 overflow-hidden rounded-panel border border-line/30 shadow-xs">
         <SkylineSvg pm25={air.pm25} visibilityKm={air.visibilityKm} />
         {isStale ? (
           <span className="absolute top-3 right-3 rounded-chip bg-caution/95 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-white shadow-xs">
             {air.ageMin}m old (cached)
           </span>
         ) : (
-          <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-chip bg-surface/90 backdrop-blur-md border border-line/60 px-2.5 py-1 text-[11px] font-medium text-ink shadow-xs">
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-chip bg-surface/90 backdrop-blur-md border border-line/40 px-2.5 py-1 text-[11px] font-medium text-ink shadow-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-gain animate-pulse" />
             <span>Live Air Horizon</span>
           </span>

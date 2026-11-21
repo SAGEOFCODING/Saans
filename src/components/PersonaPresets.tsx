@@ -81,8 +81,8 @@ export function PersonaPresets({ onSelectPreset, lang = 'en' }: PersonaPresetsPr
               onClick={() => handleClick(key)}
               className={`group flex items-start gap-2.5 rounded-control border p-3 text-left transition-all duration-150 active:scale-[0.98] ${
                 isSelected
-                  ? 'border-sky bg-sky/5 shadow-xs ring-1 ring-sky/30'
-                  : 'border-line/70 bg-surface/90 hover:border-sky/50 hover:bg-surface hover:shadow-xs'
+                  ? 'border-sky bg-sky/10 shadow-xs ring-1 ring-sky/30'
+                  : 'border-line/40 bg-surface/80 hover:border-sky/40 hover:bg-surface hover:shadow-xs'
               }`}
             >
               <div

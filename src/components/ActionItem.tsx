@@ -43,7 +43,7 @@ export function ActionItem({ action, onToggleDoing, isDoing = false, lang = 'en'
       className={`action-card rounded-control border p-3.5 transition-all duration-150 ${
         isDoing
           ? 'border-gain/60 bg-gain/5 shadow-xs'
-          : 'border-line/70 bg-surface/95 hover:border-line hover:shadow-xs'
+          : 'border-line/40 bg-surface/85 hover:border-line hover:shadow-xs'
       }`}
     >
       <div className="flex items-start justify-between gap-3">

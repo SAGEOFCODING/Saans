@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Mukta:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Mukta:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -37,6 +37,15 @@
   --gain: #17794A;
   --caution: #8A5A00;
   --danger-text: #9B1C1C;
+
+  --skyline-sky-1: #94A8B3;
+  --skyline-sky-2: #B8CBD3;
+  --skyline-sky-3: #DCE5E8;
+  --skyline-haze: #CCD6DA;
+  --skyline-far: #68828F;
+  --skyline-mid: #3B5461;
+  --skyline-near: #1F3642;
+  --skyline-sun: #FFF7DF;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -61,6 +70,15 @@
     --gain: #2EB35A;
     --caution: #F59338;
     --danger-text: #F87171;
+
+    --skyline-sky-1: #0A1920;
+    --skyline-sky-2: #102631;
+    --skyline-sky-3: #183340;
+    --skyline-haze: #132833;
+    --skyline-far: #2D4C5C;
+    --skyline-mid: #41687B;
+    --skyline-near: #5A8398;
+    --skyline-sun: #F59E0B;
   }
 }
 
@@ -85,6 +103,15 @@
   --gain: #2EB35A;
   --caution: #F59338;
   --danger-text: #F87171;
+
+  --skyline-sky-1: #0A1920;
+  --skyline-sky-2: #102631;
+  --skyline-sky-3: #183340;
+  --skyline-haze: #132833;
+  --skyline-far: #2D4C5C;
+  --skyline-mid: #41687B;
+  --skyline-near: #5A8398;
+  --skyline-sun: #F59E0B;
 }
 
 html {
@@ -99,6 +126,11 @@ body {
   background-color: var(--haze);
   color: var(--ink);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+}
+
+input, select, textarea {
+  background-color: var(--surface);
+  color: var(--ink);
 }
 
 html[lang="hi"] body {

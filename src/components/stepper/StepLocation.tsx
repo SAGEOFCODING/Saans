@@ -42,13 +42,13 @@ export function StepLocation({ location, onChange, lang = 'en' }: StepLocationPr
             type="text"
             value={location.name ?? 'Delhi NCR'}
             onChange={(e) => onChange({ ...location, name: e.target.value })}
-            className="w-full rounded-control border border-line/70 bg-surface px-3 py-2 text-xs sm:text-sm text-ink focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/20 transition-all shadow-xs"
+            className="w-full rounded-control border border-line/40 bg-surface/90 px-3 py-2 text-xs sm:text-sm text-ink focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/20 transition-all shadow-xs"
             placeholder="e.g. Delhi NCR, Noida, Anand Vihar"
           />
           <button
             type="button"
             onClick={handleUseCurrentLocation}
-            className="shrink-0 inline-flex items-center gap-1.5 rounded-control border border-line/70 bg-surface hover:bg-haze px-3 py-2 text-xs font-semibold text-ink transition-all active:scale-[0.98] shadow-xs"
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-control border border-line/40 bg-surface/90 hover:bg-haze px-3 py-2 text-xs font-semibold text-ink transition-all active:scale-[0.98] shadow-xs"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="10" />
@@ -73,7 +73,7 @@ export function StepLocation({ location, onChange, lang = 'en' }: StepLocationPr
             step="0.01"
             value={location.lat}
             onChange={(e) => onChange({ ...location, lat: parseFloat(e.target.value) || 28.61 })}
-            className="w-full rounded-control border border-line/70 bg-surface px-2.5 py-1.5 text-xs text-ink tabular-nums shadow-xs focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/20"
+            className="w-full rounded-control border border-line/40 bg-surface/90 px-2.5 py-1.5 text-xs text-ink tabular-nums shadow-xs focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/20"
           />
         </div>
         <div>
@@ -86,7 +86,7 @@ export function StepLocation({ location, onChange, lang = 'en' }: StepLocationPr
             step="0.01"
             value={location.lon}
             onChange={(e) => onChange({ ...location, lon: parseFloat(e.target.value) || 77.21 })}
-            className="w-full rounded-control border border-line/70 bg-surface px-2.5 py-1.5 text-xs text-ink tabular-nums shadow-xs focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/20"
+            className="w-full rounded-control border border-line/40 bg-surface/90 px-2.5 py-1.5 text-xs text-ink tabular-nums shadow-xs focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/20"
           />
         </div>
       </div>

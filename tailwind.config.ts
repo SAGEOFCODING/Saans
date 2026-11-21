@@ -10,16 +10,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        haze: 'var(--haze)',
-        surface: 'var(--surface)',
-        line: 'var(--line)',
+        haze: 'color-mix(in srgb, var(--haze) calc(100% * <alpha-value>), transparent)',
+        surface: 'color-mix(in srgb, var(--surface) calc(100% * <alpha-value>), transparent)',
+        line: 'color-mix(in srgb, var(--line) calc(100% * <alpha-value>), transparent)',
         ink: {
-          DEFAULT: 'var(--ink)',
-          muted: 'var(--ink-muted)',
+          DEFAULT: 'color-mix(in srgb, var(--ink) calc(100% * <alpha-value>), transparent)',
+          muted: 'color-mix(in srgb, var(--ink-muted) calc(100% * <alpha-value>), transparent)',
         },
         sky: {
-          DEFAULT: 'var(--sky)',
-          deep: 'var(--sky-deep)',
+          DEFAULT: 'color-mix(in srgb, var(--sky) calc(100% * <alpha-value>), transparent)',
+          deep: 'color-mix(in srgb, var(--sky-deep) calc(100% * <alpha-value>), transparent)',
           on: 'var(--on-sky)',
         },
         aqi: {
@@ -38,22 +38,29 @@ const config: Config = {
       fontFamily: {
         display: [
           '"Bricolage Grotesque"',
-          'var(--font-display)',
+          'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
-          'Roboto',
           'sans-serif',
         ],
         body: [
           '"Mukta"',
-          'var(--font-body)',
+          'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
-          'Roboto',
           '"Noto Sans Devanagari"',
           'sans-serif',
+        ],
+        mono: [
+          '"JetBrains Mono"',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'monospace',
         ],
       },
       borderRadius: {
