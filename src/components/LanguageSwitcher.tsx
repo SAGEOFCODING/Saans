@@ -22,12 +22,12 @@ export function LanguageSwitcher({ currentLang, onLangChange }: LanguageSwitcher
       id="language-switcher"
       role="group"
       aria-label="Language selection"
-      className="inline-flex rounded-control border border-line bg-surface p-0.5 shadow-sm"
+      className="inline-flex rounded-chip border border-line bg-surface/90 p-0.5 shadow-sm text-xs"
     >
       <button
         type="button"
         onClick={() => handleToggle('en')}
-        className={`px-3 py-1 text-sm font-semibold rounded-control transition-colors ${
+        className={`px-2.5 py-1 text-xs font-semibold rounded-chip transition-all ${
           currentLang === 'en'
             ? 'bg-sky text-on-sky shadow-sm'
             : 'text-ink-muted hover:text-ink'
@@ -39,7 +39,7 @@ export function LanguageSwitcher({ currentLang, onLangChange }: LanguageSwitcher
       <button
         type="button"
         onClick={() => handleToggle('hi')}
-        className={`px-3 py-1 text-sm font-semibold rounded-control transition-colors ${
+        className={`px-2.5 py-1 text-xs font-semibold rounded-chip transition-all ${
           currentLang === 'hi'
             ? 'bg-sky text-on-sky shadow-sm'
             : 'text-ink-muted hover:text-ink'

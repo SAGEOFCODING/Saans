@@ -38,11 +38,11 @@ export function CommunityPack({ initialHouseholds = 120, lang = 'en' }: Communit
   return (
     <section
       aria-label="Community Clean Air Multiplier"
-      className="my-6 rounded-panel border border-line bg-surface p-4 sm:p-5 shadow-sm space-y-4"
+      className="my-6 rounded-panel border border-line/70 bg-surface/95 p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-4 transition-all"
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line/40 pb-3">
         <div>
-          <h3 className="text-base font-bold text-ink">
+          <h3 className="text-base font-bold text-ink tracking-tight">
             {isHi ? 'सामुदायिक प्रभाव व आरडब्ल्यूए पैक' : 'Community Smog Action & RWA Pack'}
           </h3>
           <p className="text-xs text-ink-muted">
@@ -51,11 +51,20 @@ export function CommunityPack({ initialHouseholds = 120, lang = 'en' }: Communit
               : 'Scale collective action across your apartment society or neighborhood'}
           </p>
         </div>
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="self-start sm:self-auto inline-flex items-center gap-1.5 rounded-control border border-line bg-surface hover:bg-haze px-3 py-1.5 text-xs font-semibold text-ink transition-all active:scale-[0.98] shadow-xs"
+          aria-label="Copy RWA Notice Text"
+        >
+          {copied ? <CheckIcon size={14} className="text-gain" /> : <CopyIcon size={14} />}
+          <span>{copied ? (isHi ? 'कॉपी हो गया!' : 'Copied!') : (isHi ? 'नोटिस कॉपी करें' : 'Copy Notice')}</span>
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 text-xs">
         <div>
-          <label htmlFor="comm-households" className="block font-semibold text-ink mb-1">
+          <label htmlFor="comm-households" className="block font-semibold text-ink mb-1.5">
             {isHi ? `सोसायटी फ्लैट्स (${households})` : `Households (${households})`}
           </label>
           <input
@@ -66,12 +75,12 @@ export function CommunityPack({ initialHouseholds = 120, lang = 'en' }: Communit
             step="10"
             value={households}
             onChange={(e) => setHouseholds(parseInt(e.target.value, 10))}
-            className="w-full"
+            className="w-full accent-sky cursor-pointer"
           />
         </div>
 
         <div>
-          <label htmlFor="comm-adoption" className="block font-semibold text-ink mb-1">
+          <label htmlFor="comm-adoption" className="block font-semibold text-ink mb-1.5">
             {isHi ? `सहभागिता (${Math.round(adoptionRate * 100)}%)` : `Adoption (${Math.round(adoptionRate * 100)}%)`}
           </label>
           <input
@@ -82,56 +91,36 @@ export function CommunityPack({ initialHouseholds = 120, lang = 'en' }: Communit
             step="0.1"
             value={adoptionRate}
             onChange={(e) => setAdoptionRate(parseFloat(e.target.value))}
-            className="w-full"
+            className="w-full accent-sky cursor-pointer"
           />
         </div>
 
         <div>
-          <label htmlFor="comm-days" className="block font-semibold text-ink mb-1">
+          <label htmlFor="comm-days" className="block font-semibold text-ink mb-1.5">
             {isHi ? `अवधि (${days} दिन)` : `Duration (${days} days)`}
           </label>
           <select
             id="comm-days"
             value={days}
             onChange={(e) => setDays(parseInt(e.target.value, 10))}
-            className="w-full rounded-control border border-line bg-surface p-1 text-ink"
+            className="w-full rounded-control border border-line bg-surface p-1.5 text-ink font-medium"
           >
             <option value="7">7 {isHi ? 'दिन' : 'days'}</option>
             <option value="30">30 {isHi ? 'दिन' : 'days'}</option>
+            <option value="60">60 {isHi ? 'दिन' : 'days'}</option>
             <option value="90">90 {isHi ? 'दिन' : 'days'}</option>
           </select>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-control bg-gain/10 p-3 text-xs">
-        <span className="font-semibold text-gain">
-          {isHi ? 'अनुमानित सामूहिक CO₂e कटौती:' : 'Collective CO₂e avoided:'} {impact.collectiveCO2eKg} kg
+      {/* Collective Metric Pill */}
+      <div className="rounded-control bg-gain/10 border border-gain/20 p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <span className="font-semibold text-ink">
+          {isHi ? 'सामूहिक CO₂e उत्सर्जन बचत:' : 'Collective CO₂e avoided:'}
         </span>
-        <span className="text-ink-muted">
-          ≈ {carTrips} {isHi ? 'पेट्रोल कार यात्राएं टलीं' : 'petrol car trips avoided'}
+        <span className="text-sm font-bold text-gain tabular-nums">
+          {impact.collectiveCO2eKg} kg CO₂e {carTrips > 0 ? `(≈ ${carTrips} car trips)` : ''}
         </span>
-      </div>
-
-      <div>
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="text-xs font-semibold text-ink">
-            {isHi ? 'व्हाट्सएप / नोटिस बोर्ड संदेश:' : 'WhatsApp / Noticeboard Broadcast:'}
-          </span>
-          <button
-            type="button"
-            onClick={handleCopy}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-sky hover:text-sky-deep focus:outline-none"
-          >
-            {copied ? <CheckIcon size={14} className="text-gain" /> : <CopyIcon size={14} />}
-            <span>{copied ? (isHi ? 'कॉपी हो गया!' : 'Copied!') : (isHi ? 'कॉपी करें' : 'Copy Notice')}</span>
-          </button>
-        </div>
-        <textarea
-          readOnly
-          value={noticeText}
-          rows={5}
-          className="w-full rounded-control border border-line bg-haze/50 p-2.5 font-mono text-[11px] text-ink focus:outline-none"
-        />
       </div>
     </section>
   );

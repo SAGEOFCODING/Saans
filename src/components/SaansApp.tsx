@@ -72,38 +72,74 @@ export function SaansApp({ initialAir }: SaansAppProps) {
   const activeAir = air ?? plan?.air ?? null;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8">
-      <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold font-display tracking-tight text-ink">Saans (सांस)</h1>
-          <p className="text-xs sm:text-sm text-ink-muted">
-            {lang === 'hi' ? 'गंभीर स्मॉग के दौरान परिवारों का स्वच्छ-वायु गाइड' : 'Clean-air copilot for winter smog & urban air pollution'}
-          </p>
-        </div>
+    <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8 space-y-6">
+      {/* Top Header */}
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line/40 pb-5">
         <div className="flex items-center gap-3">
+          {/* Logo Mark */}
+          <div className="h-9 w-9 rounded-control bg-sky text-on-sky flex items-center justify-center font-bold shadow-xs">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
+              <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
+              <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
+            </svg>
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl sm:text-3xl font-extrabold font-display tracking-tight text-ink">
+                Saans (सांस)
+              </h1>
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-chip bg-gain/10 border border-gain/20 px-2 py-0.5 text-[10px] font-semibold text-gain">
+                <span className="h-1.5 w-1.5 rounded-full bg-gain animate-pulse" />
+                <span>Delhi NCR Live</span>
+              </span>
+            </div>
+            <p className="text-xs text-ink-muted">
+              {lang === 'hi'
+                ? 'गंभीर स्मॉग के दौरान परिवारों का स्वच्छ-वायु गाइड'
+                : 'Clean-air copilot for winter smog & urban air pollution'}
+            </p>
+          </div>
+        </div>
+
+        {/* Top Controls */}
+        <div className="flex items-center gap-2.5">
           <ThemeToggle />
           <LanguageSwitcher currentLang={lang} onLangChange={setLang} />
           <button
             id="chat-trigger"
             type="button"
             onClick={() => setChatOpen(true)}
-            className="flex items-center gap-1.5 rounded-control bg-sky px-3.5 py-1.5 text-xs font-bold text-on-sky shadow-sm hover:bg-sky-deep focus:ring-2 focus:ring-sky"
+            className="inline-flex items-center gap-1.5 rounded-control bg-sky px-3.5 py-1.5 text-xs font-bold text-on-sky shadow-xs hover:bg-sky-deep focus:ring-2 focus:ring-sky transition-all active:scale-[0.98]"
             aria-label="Open AI advisor chat"
           >
-            <ChatIcon size={16} />
+            <ChatIcon size={15} />
             <span>{lang === 'hi' ? 'सलाहकार से पूछें' : 'Ask Saans'}</span>
           </button>
         </div>
       </header>
 
+      {/* Mode / Degraded status banner */}
       <ModeBanner mode={meta?.mode} airSource={meta?.airSource} airAgeMin={meta?.airAgeMin} />
-      <HazeHero air={activeAir} lang={lang} />
-      {activeAir && <StatusStrip air={activeAir} lang={lang} />}
-      {activeAir?.hourly && (
-        <HourlyStrip hourly={activeAir.hourly} bestWindow={plan?.window?.best} worstWindow={plan?.window?.worst} lang={lang} />
-      )}
 
+      {/* Haze Horizon & Weather Strip */}
+      <div className="space-y-3">
+        <HazeHero air={activeAir} lang={lang} />
+        {activeAir && <StatusStrip air={activeAir} lang={lang} />}
+        {activeAir?.hourly && (
+          <HourlyStrip
+            hourly={activeAir.hourly}
+            bestWindow={plan?.window?.best}
+            worstWindow={plan?.window?.worst}
+            lang={lang}
+          />
+        )}
+      </div>
+
+      {/* Quick Persona Presets */}
       <PersonaPresets onSelectPreset={handlePresetSelect} lang={lang} />
+
+      {/* 5-Step Household Stepper */}
       <HouseholdStepper
         household={household}
         location={location}
@@ -114,7 +150,7 @@ export function SaansApp({ initialAir }: SaansAppProps) {
         lang={lang}
       />
 
-      {/* Screen Reader Live Status for Plan Generation */}
+      {/* Screen Reader Live Status */}
       <div aria-live="polite" className="sr-only">
         {loading
           ? (lang === 'hi'
@@ -127,14 +163,16 @@ export function SaansApp({ initialAir }: SaansAppProps) {
           : ''}
       </div>
 
+      {/* Error state */}
       {error && (
         <div className="my-4 rounded-panel border border-danger-text/30 bg-danger-text/10 p-4 text-xs font-semibold text-danger-text">
           {error}
         </div>
       )}
 
+      {/* Generated Plan Section (60% timeline / 40% sticky what-if & impact panel) */}
       {plan && (
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
           <div className="lg:col-span-3 space-y-6">
             <RiskSummary risks={plan.risks} members={household.members} lang={lang} />
             <PlanTimeline
@@ -143,13 +181,14 @@ export function SaansApp({ initialAir }: SaansAppProps) {
               onToggleAction={handleToggleAction}
               lang={lang}
             />
-            <CommunityPack lang={lang} />
           </div>
-          <div className="lg:col-span-2 space-y-6 lg:sticky lg:top-4 self-start">
+
+          <aside className="lg:col-span-2 space-y-6 lg:sticky lg:top-4">
             <ImpactBar
               baseline={simulation.baseline || plan.baseline || 100}
               planned={simulation.simulated || plan.planned || 65}
               co2eSavedKg={1.75}
+              targetMember={household.members.find((m) => m.band === 'infant' || m.band === 'senior')?.band ?? 'vulnerable member'}
               lang={lang}
             />
             <WhatIfPanel
@@ -158,11 +197,17 @@ export function SaansApp({ initialAir }: SaansAppProps) {
               deltaPct={simulation.deltaPct}
               lang={lang}
             />
-          </div>
+            <CommunityPack initialHouseholds={120} lang={lang} />
+          </aside>
         </div>
       )}
 
-      <SafetyNote lang={lang} />
+      {/* Bottom Safety Note */}
+      <footer className="pt-6 border-t border-line/40">
+        <SafetyNote lang={lang} />
+      </footer>
+
+      {/* Chat Sheet (SSE) */}
       <ChatSheet
         isOpen={chatOpen}
         onClose={() => setChatOpen(false)}

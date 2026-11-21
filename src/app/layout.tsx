@@ -6,11 +6,12 @@ const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
+  weight: ['400', '600', '700', '800'],
 });
 
 const mukta = Mukta({
   subsets: ['latin', 'devanagari'],
-  weight: ['400', '600', '700'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 });
@@ -30,7 +31,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-haze text-ink font-body antialiased selection:bg-sky selection:text-on-sky">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-sky focus:text-on-sky focus:rounded-control"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-sky focus:text-on-sky focus:rounded-control focus:shadow-md"
         >
           Skip to main content
         </a>

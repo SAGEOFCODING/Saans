@@ -22,8 +22,8 @@ export function HourlyStrip({ hourly, bestWindow, worstWindow, lang = 'en' }: Ho
   if (!hourly || hourly.length === 0) return null;
 
   const maxVal = Math.max(...hourly.map((h) => h.pm25), 100);
-  const chartHeight = 80;
-  const barWidth = 10;
+  const chartHeight = 84;
+  const barWidth = 11;
   const barGap = 4;
   const totalWidth = hourly.length * (barWidth + barGap);
 
@@ -35,20 +35,25 @@ export function HourlyStrip({ hourly, bestWindow, worstWindow, lang = 'en' }: Ho
   return (
     <section
       aria-label={lang === 'hi' ? '24 घंटे का PM2.5 पूर्वानुमान' : '24-hour PM2.5 forecast'}
-      className="my-4 rounded-panel border border-line bg-surface p-4 shadow-sm"
+      className="my-4 rounded-panel border border-line/70 bg-surface/95 p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)] transition-all"
     >
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-        <h3 className="text-sm font-bold text-ink">
-          {lang === 'hi' ? '24 घंटे का वायु पूर्वानुमान' : '24-Hour Forecast & Cleanest Window'}
-        </h3>
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3.5 border-b border-line/40 pb-2.5">
+        <div>
+          <h3 className="text-sm font-bold text-ink tracking-tight">
+            {lang === 'hi' ? '24 घंटे का वायु पूर्वानुमान' : '24-Hour Forecast & Cleanest Window'}
+          </h3>
+          <p className="text-[11px] text-ink-muted">
+            {lang === 'hi' ? 'घंटेवार PM2.5 का रुझान और वेंटिलेशन विंडो' : 'Hourly PM2.5 curve & natural ventilation window'}
+          </p>
+        </div>
         <div className="flex items-center gap-2 text-xs">
           {bestWindow && (
-            <span className="inline-flex items-center gap-1 rounded-chip bg-gain/10 border border-gain/30 px-2 py-0.5 font-semibold text-gain">
+            <span className="inline-flex items-center gap-1 rounded-chip bg-gain/10 border border-gain/30 px-2.5 py-0.5 font-semibold text-gain shadow-xs">
               ★ {lang === 'hi' ? 'श्रेष्ठ समय:' : 'Cleanest:'} {bestWindow.start}–{bestWindow.end}
             </span>
           )}
           {worstWindow && (
-            <span className="inline-flex items-center gap-1 rounded-chip bg-aqi-verypoor/10 border border-aqi-verypoor/30 px-2 py-0.5 font-semibold text-aqi-verypoor">
+            <span className="inline-flex items-center gap-1 rounded-chip bg-aqi-verypoor/10 border border-aqi-verypoor/30 px-2.5 py-0.5 font-semibold text-aqi-verypoor shadow-xs">
               ▲ {lang === 'hi' ? 'उच्चतम प्रदूषण:' : 'Peak Smog:'} {worstWindow.start}–{worstWindow.end}
             </span>
           )}
@@ -94,25 +99,41 @@ export function HourlyStrip({ hourly, bestWindow, worstWindow, lang = 'en' }: Ho
                 <title>{`${pt.t}: ${pt.pm25} µg/m³ (${cat})`}</title>
                 {/* Highlight halo for best window */}
                 {inBest && (
-                  <rect x={x - 1} y={0} width={barWidth + 2} height={chartHeight} fill="#0E6E8C" opacity="0.15" rx="2" />
+                  <rect x={x - 1} y={0} width={barWidth + 2} height={chartHeight} fill="#0E6E8C" opacity="0.14" rx="2" />
+                )}
+                {/* Highlight for worst window */}
+                {inWorst && (
+                  <rect x={x - 1} y={0} width={barWidth + 2} height={chartHeight} fill="#C62828" opacity="0.10" rx="2" />
                 )}
                 {/* Base bar */}
                 <rect x={x} y={y} width={barWidth} height={h} rx="2" fill={baseColor} />
-                {/* Color-blind texture overlay */}
-                {cat === 'satisfactory' && <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-sat)" />}
-                {cat === 'moderate' && <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-mod)" />}
-                {cat === 'poor' && <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-poor)" />}
-                {cat === 'very-poor' && <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-verypoor)" />}
-                {cat === 'severe' && <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-sev)" />}
 
-                {/* Best/Worst icon marker above bar */}
-                {inBest && <circle cx={x + barWidth / 2} cy={Math.max(4, y - 5)} r="2" fill="#0E6E8C" />}
-                {inWorst && <polygon points={`${x + 1},${Math.max(2, y - 3)} ${x + barWidth - 1},${Math.max(2, y - 3)} ${x + barWidth / 2},${Math.max(6, y - 7)}`} fill="#C62828" />}
+                {/* Pattern overlay for accessibility */}
+                {cat === 'satisfactory' && (
+                  <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-sat)" />
+                )}
+                {cat === 'moderate' && (
+                  <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-mod)" />
+                )}
+                {cat === 'poor' && (
+                  <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-poor)" />
+                )}
+                {cat === 'very-poor' && (
+                  <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-verypoor)" />
+                )}
+                {cat === 'severe' && (
+                  <rect x={x} y={y} width={barWidth} height={h} rx="2" fill="url(#pat-sev)" />
+                )}
 
-                {/* Time label every 3 hours */}
+                {/* Time label below bar every 3 hours */}
                 {i % 3 === 0 && (
-                  <text x={x + barWidth / 2} y={chartHeight + 14} textAnchor="middle" fontSize="9" fill="#4A5C66">
-                    {pt.t.split(':')[0]}
+                  <text
+                    x={x + barWidth / 2}
+                    y={chartHeight + 14}
+                    textAnchor="middle"
+                    className="text-[9px] fill-ink-muted select-none font-medium tabular-nums"
+                  >
+                    {pt.t.split(':')[0]}h
                   </text>
                 )}
               </g>
@@ -120,17 +141,6 @@ export function HourlyStrip({ hourly, bestWindow, worstWindow, lang = 'en' }: Ho
           })}
         </svg>
       </div>
-
-      {/* Screen reader list representation */}
-      <ul className="sr-only">
-        {hourly.map((pt) => (
-          <li key={pt.t}>
-            {pt.t}: {pt.pm25} µg/m³, {getAQICategory(pt.aqi)}
-            {isBest(pt.t) ? ' (Recommended activity window)' : ''}
-            {isWorst(pt.t) ? ' (Peak smog window)' : ''}
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

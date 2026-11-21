@@ -85,18 +85,50 @@
   --danger-text: #F87171;
 }
 
+html {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+  letter-spacing: -0.012em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   background-color: var(--haze);
   color: var(--ink);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
 }
 
 html[lang="hi"] body {
-  line-height: 1.6;
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+::selection {
+  background-color: var(--sky);
+  color: var(--on-sky);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-muted);
 }
 
 :focus-visible {
-  outline: 3px solid var(--sky-deep);
+  outline: 2px solid var(--sky-deep);
   outline-offset: 2px;
 }
 
@@ -119,44 +151,28 @@ html[lang="hi"] body {
   }
 
   body {
-    background: #FFFFFF !important;
+    background: #ffffff !important;
     color: #000000 !important;
-    font-size: 11pt;
-    line-height: 1.35;
+    font-size: 11pt !important;
   }
 
-  nav,
-  header button,
-  .no-print,
-  button,
-  input,
-  select,
-  [role="dialog"],
-  [data-print-hide="true"],
+  header,
+  footer,
   #chat-trigger,
-  #stepper-controls,
   #whatif-sliders,
-  #language-switcher,
-  #mode-banner {
+  #stepper-controls,
+  .print-hide {
     display: none !important;
   }
 
-  #main-content {
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .action-card,
-  .risk-card,
-  .timeline-block,
-  .break-inside-avoid {
-    break-inside: avoid !important;
+  .timeline-block {
     page-break-inside: avoid !important;
+    margin-bottom: 8mm !important;
   }
 
-  a {
-    text-decoration: none;
-    color: inherit;
+  .action-card {
+    border: 1px solid #cccccc !important;
+    background: #ffffff !important;
+    page-break-inside: avoid !important;
   }
 }

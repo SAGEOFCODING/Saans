@@ -19,27 +19,32 @@ export function ImpactBar({ baseline, planned, targetMember, co2eSavedKg = 0, la
   return (
     <section
       aria-label="Exposure Reduction Impact"
-      className="rounded-panel border border-line bg-surface p-4 shadow-sm space-y-3"
+      className="rounded-panel border border-line/70 bg-surface/95 p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-3.5 transition-all"
     >
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-bold text-ink">
-          {isHi ? 'अनुमानित प्रदूषक जोखिम में कमी' : 'Exposure Reduction Impact'}
-        </h3>
-        <span className="text-xs font-bold text-gain">
+      <div className="flex items-center justify-between border-b border-line/40 pb-2.5">
+        <div>
+          <h3 className="text-sm font-bold text-ink tracking-tight">
+            {isHi ? 'अनुमानित प्रदूषक जोखिम में कमी' : 'Exposure Reduction Impact'}
+          </h3>
+          <p className="text-[11px] text-ink-muted">
+            {isHi ? 'दैनिक सूक्ष्म-पर्यावरण जोखिम सूचकांक' : 'Daily microenvironment exposure index'}
+          </p>
+        </div>
+        <span className="rounded-chip bg-gain/10 border border-gain/30 px-2.5 py-0.5 text-xs font-bold text-gain shadow-xs">
           ↓ {deltaPct}% {isHi ? 'कम' : 'lower'}
         </span>
       </div>
 
-      <div className="space-y-2 text-xs">
+      <div className="space-y-3 text-xs">
         {/* Baseline Bar */}
         <div>
-          <div className="flex justify-between text-ink-muted mb-1">
+          <div className="flex justify-between text-ink-muted mb-1 text-[11px]">
             <span>{isHi ? 'वर्तमान स्तर (बिना उपाय):' : 'Baseline Exposure:'}</span>
             <span className="font-semibold tabular-nums text-ink">{baseline}</span>
           </div>
-          <div className="h-3 w-full rounded-full bg-haze overflow-hidden">
+          <div className="h-2.5 w-full rounded-full bg-haze overflow-hidden">
             <div
-              className="h-full rounded-full bg-ink-muted/50 transition-all duration-300"
+              className="h-full rounded-full bg-ink-muted/40 transition-all duration-300"
               style={{ width: `${baselinePct}%` }}
               role="progressbar"
               aria-valuenow={baseline}
@@ -52,13 +57,13 @@ export function ImpactBar({ baseline, planned, targetMember, co2eSavedKg = 0, la
 
         {/* Planned Bar */}
         <div>
-          <div className="flex justify-between text-ink-muted mb-1">
+          <div className="flex justify-between text-ink-muted mb-1 text-[11px]">
             <span className="font-medium text-gain">
               {isHi ? 'योजना के साथ:' : 'With Clean-Air Plan:'}
             </span>
             <span className="font-bold tabular-nums text-gain">{planned}</span>
           </div>
-          <div className="h-3 w-full rounded-full bg-haze overflow-hidden">
+          <div className="h-2.5 w-full rounded-full bg-haze overflow-hidden">
             <div
               className="h-full rounded-full bg-gain transition-all duration-300"
               style={{ width: `${plannedPct}%` }}
@@ -72,16 +77,16 @@ export function ImpactBar({ baseline, planned, targetMember, co2eSavedKg = 0, la
         </div>
       </div>
 
-      <p className="text-xs text-ink-muted leading-relaxed">
+      <p className="text-xs text-ink-muted leading-relaxed font-normal">
         {isHi
           ? `अनुमानित जोखिम ${baseline} से घटकर ${planned} (लगभग ${deltaPct}% की कमी)। अनुमान, मध्यम विश्वसनीयता।`
           : `Estimated exposure ${baseline} → ${planned} (${deltaPct}% lower${targetMember ? ` for ${targetMember}` : ''}). Estimate, medium confidence.`}
       </p>
 
       {co2eSavedKg > 0 && (
-        <div className="border-t border-line/60 pt-2 text-xs text-ink-muted flex items-center justify-between">
-          <span>{isHi ? 'सामूहिक CO₂e बचत:' : 'CO₂e saved today:'}</span>
-          <span className="font-semibold text-gain">
+        <div className="border-t border-line/40 pt-2.5 text-xs text-ink-muted flex items-center justify-between">
+          <span className="font-medium">{isHi ? 'सामूहिक CO₂e बचत:' : 'CO₂e saved today:'}</span>
+          <span className="font-bold text-gain tabular-nums">
             {co2eSavedKg} kg {carTrips > 0 ? `(≈ ${carTrips} car trips)` : ''}
           </span>
         </div>

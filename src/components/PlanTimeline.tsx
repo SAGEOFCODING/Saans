@@ -26,12 +26,17 @@ export function PlanTimeline({ blocks, activeActionIds = [], onToggleAction, lan
   if (!blocks || blocks.length === 0) return null;
 
   return (
-    <section aria-label="Daily Clean Air Schedule" className="my-6 space-y-6">
-      <h3 className="text-base font-bold text-ink">
-        {isHi ? 'समयबद्ध स्वच्छ-वायु कार्यक्रम' : 'Time-Blocked Clean-Air Routine'}
-      </h3>
+    <section aria-label="Daily Clean Air Schedule" className="my-6 space-y-5">
+      <div className="flex items-center justify-between border-b border-line/40 pb-2">
+        <h3 className="text-base font-bold text-ink tracking-tight">
+          {isHi ? 'समयबद्ध स्वच्छ-वायु कार्यक्रम' : 'Time-Blocked Clean-Air Routine'}
+        </h3>
+        <span className="text-xs text-ink-muted">
+          {blocks.length} {isHi ? 'समय-खंड' : 'blocks'}
+        </span>
+      </div>
 
-      <div className="relative border-l-2 border-line/70 ml-3 sm:ml-4 pl-4 sm:pl-6 space-y-6">
+      <div className="relative border-l-2 border-line/60 ml-3 sm:ml-4 pl-4 sm:pl-6 space-y-6">
         {blocks.map((block) => {
           const label = BLOCK_LABELS[block.id] ?? {
             en: `${block.span ? `${block.span.start} - ${block.span.end}` : block.id}`,
@@ -41,14 +46,14 @@ export function PlanTimeline({ blocks, activeActionIds = [], onToggleAction, lan
           return (
             <div key={block.id} className="timeline-block relative">
               {/* Timeline spine dot */}
-              <div className="absolute -left-[21px] sm:-left-[29px] top-1 h-3 w-3 rounded-full border-2 border-surface bg-sky" />
+              <div className="absolute -left-[21px] sm:-left-[29px] top-1 h-3 w-3 rounded-full border-2 border-surface bg-sky shadow-xs" />
 
               <div className="mb-2.5 flex items-center gap-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-ink-muted">
                   {isHi ? label.hi : label.en}
                 </h4>
                 {block.env && (
-                  <span className="rounded-chip bg-haze px-2 py-0.5 text-[10px] text-ink-muted">
+                  <span className="rounded-chip bg-haze border border-line/40 px-2 py-0.5 text-[10px] font-medium text-ink-muted">
                     {block.env}
                   </span>
                 )}

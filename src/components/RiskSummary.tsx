@@ -30,10 +30,15 @@ export function RiskSummary({ risks, members, lang = 'en' }: RiskSummaryProps) {
   if (!risks || risks.length === 0) return null;
 
   return (
-    <section aria-label="Household Risk Assessment" className="my-5 space-y-3">
-      <h3 className="text-base font-bold text-ink">
-        {isHi ? 'सदस्य संवेदनशीलता और जोखिम स्तर' : 'Household Member Vulnerability'}
-      </h3>
+    <section aria-label="Household Risk Assessment" className="my-5 space-y-3.5">
+      <div className="flex items-center justify-between border-b border-line/40 pb-2">
+        <h3 className="text-base font-bold text-ink tracking-tight">
+          {isHi ? 'सदस्य संवेदनशीलता और जोखिम स्तर' : 'Household Member Vulnerability'}
+        </h3>
+        <span className="text-xs text-ink-muted">
+          {risks.length} {isHi ? 'सदस्य' : 'members evaluated'}
+        </span>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {risks.map((risk, index) => {
           const member = members[index];
@@ -44,23 +49,23 @@ export function RiskSummary({ risks, members, lang = 'en' }: RiskSummaryProps) {
           return (
             <div
               key={index}
-              className="risk-card rounded-control border border-line bg-surface p-3.5 shadow-sm"
+              className="risk-card rounded-control border border-line/70 bg-surface/95 p-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-line transition-all"
             >
-              <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className="font-bold text-sm text-ink">
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="font-bold text-xs sm:text-sm text-ink flex items-center gap-1.5">
                   {isHi ? bandInfo.hi : bandInfo.en}
                   {member?.sensitive && (
-                    <span className="ml-1.5 rounded-chip bg-caution/15 px-1.5 py-0.5 text-[11px] font-semibold text-caution">
+                    <span className="rounded-chip bg-caution/15 px-2 py-0.5 text-[10px] font-semibold text-caution">
                       {isHi ? 'संवेदनशील' : 'Sensitive'}
                     </span>
                   )}
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-chip bg-haze px-2 py-0.5 text-xs font-bold text-ink">
+                <span className="inline-flex items-center gap-1 rounded-chip bg-haze border border-line/50 px-2 py-0.5 text-xs font-bold text-ink">
                   <CategoryIcon tier={risk.tier} size={11} />
                   Tier {risk.tier} · {isHi ? tierMeta.nameHi : tierMeta.nameEn}
                 </span>
               </div>
-              <p className="text-xs text-ink-muted leading-relaxed">
+              <p className="text-xs text-ink-muted leading-relaxed font-normal">
                 {risk.message ? risk.message : (isHi ? tierMeta.hi : tierMeta.en)}
               </p>
             </div>
