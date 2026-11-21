@@ -13,15 +13,53 @@
   --on-sky: #FFFFFF;
 
   --aqi-good: #1B7F3B;
+  --aqi-good-tint: #E3F3E7;
+  --aqi-good-text: #FFFFFF;
   --aqi-satisfactory: #4F7A12;
+  --aqi-satisfactory-tint: #EAF1DC;
+  --aqi-satisfactory-text: #FFFFFF;
   --aqi-moderate: #F2C230;
+  --aqi-moderate-tint: #FBF1CB;
+  --aqi-moderate-text: #1F1A00;
   --aqi-poor: #E8730C;
+  --aqi-poor-tint: #FCE3CC;
+  --aqi-poor-text: #1A1A1A;
   --aqi-verypoor: #C62828;
+  --aqi-verypoor-tint: #F8D9D9;
+  --aqi-verypoor-text: #FFFFFF;
+  --aqi-very-poor: #C62828;
   --aqi-severe: #7B1E3A;
+  --aqi-severe-tint: #EBD3DB;
+  --aqi-severe-text: #FFFFFF;
 
   --gain: #17794A;
-  --caution: #C46200;
-  --danger-text: #A61B1B;
+  --caution: #8A5A00;
+  --danger-text: #9B1C1C;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --haze: #0C1A21;
+    --surface: #14262F;
+    --line: #2B414C;
+    --ink: #E8EEF0;
+    --ink-muted: #A9BAC2;
+    --sky: #5CC0DE;
+    --sky-deep: #8ED3E8;
+    --on-sky: #071217;
+
+    --aqi-good: #2EB35A;
+    --aqi-satisfactory: #7BB829;
+    --aqi-moderate: #F7D566;
+    --aqi-poor: #F59338;
+    --aqi-verypoor: #E54848;
+    --aqi-very-poor: #E54848;
+    --aqi-severe: #B83A61;
+
+    --gain: #2EB35A;
+    --caution: #F59338;
+    --danger-text: #E54848;
+  }
 }
 
 .dark {
@@ -33,21 +71,80 @@
   --sky: #5CC0DE;
   --sky-deep: #8ED3E8;
   --on-sky: #071217;
-
-  --aqi-good: #2EB35A;
-  --aqi-satisfactory: #7BB829;
-  --aqi-moderate: #F7D566;
-  --aqi-poor: #F59338;
-  --aqi-verypoor: #E54848;
-  --aqi-severe: #B83A61;
-
-  --gain: #2EB35A;
-  --caution: #F59338;
-  --danger-text: #E54848;
 }
 
 body {
   background-color: var(--haze);
   color: var(--ink);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+html[lang="hi"] body {
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sky-deep);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Feature 52: Clean 1-page A4 Printable daily plan stylesheet */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm 12mm;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 11pt;
+    line-height: 1.35;
+  }
+
+  nav,
+  header button,
+  .no-print,
+  button,
+  input,
+  select,
+  [role="dialog"],
+  [data-print-hide="true"],
+  #chat-trigger,
+  #stepper-controls,
+  #whatif-sliders,
+  #language-switcher,
+  #mode-banner {
+    display: none !important;
+  }
+
+  #main-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .action-card,
+  .risk-card,
+  .timeline-block,
+  .break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }

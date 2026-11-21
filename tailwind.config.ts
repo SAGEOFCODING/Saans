@@ -36,8 +36,8 @@ const config: Config = {
         'danger-text': 'var(--danger-text)',
       },
       fontFamily: {
-        display: ['var(--font-bricolage)', 'ui-sans-serif', 'system-ui'],
-        body: ['var(--font-mukta)', 'ui-sans-serif', 'system-ui', 'Noto Sans Devanagari'],
+        display: ['var(--font-display)', 'var(--font-bricolage)', 'ui-sans-serif', 'system-ui'],
+        body: ['var(--font-body)', 'var(--font-mukta)', 'ui-sans-serif', 'system-ui', 'Noto Sans Devanagari'],
       },
       borderRadius: {
         hero: '24px',
