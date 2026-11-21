@@ -36,8 +36,25 @@ const config: Config = {
         'danger-text': 'var(--danger-text)',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'var(--font-bricolage)', 'ui-sans-serif', 'system-ui'],
-        body: ['var(--font-body)', 'var(--font-mukta)', 'ui-sans-serif', 'system-ui', 'Noto Sans Devanagari'],
+        display: [
+          '"Bricolage Grotesque"',
+          'var(--font-display)',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          'sans-serif',
+        ],
+        body: [
+          '"Mukta"',
+          'var(--font-body)',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Noto Sans Devanagari"',
+          'sans-serif',
+        ],
       },
       borderRadius: {
         hero: '24px',

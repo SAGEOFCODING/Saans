@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Mukta:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -87,7 +89,7 @@
 
 html {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
-  letter-spacing: -0.012em;
+  letter-spacing: -0.015em;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -12,14 +12,14 @@ export function middleware(request: NextRequest) {
   const cspHeader = `
     default-src 'self';
     script-src ${scriptSrc};
-    style-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data:;
-    font-src 'self';
+    font-src 'self' https://fonts.gstatic.com data:;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    connect-src 'self' https://air-quality-api.open-meteo.com https://geocoding-api.open-meteo.com https://generativelanguage.googleapis.com;
+    connect-src 'self' https://air-quality-api.open-meteo.com https://geocoding-api.open-meteo.com https://generativelanguage.googleapis.com https://fonts.googleapis.com https://fonts.gstatic.com;
   `.replace(/\s{2,}/g, ' ').trim();
 
   const requestHeaders = new Headers(request.headers);

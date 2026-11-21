@@ -19,14 +19,14 @@ export function StepMobility({ mobility, onChange, lang = 'en' }: StepMobilityPr
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
       <div>
-        <label htmlFor="mob-mode" className="block font-semibold text-ink mb-1">
+        <label htmlFor="mob-mode" className="block text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-1">
           {isHi ? 'मुख्य आवागमन साधन' : 'Primary Commute Mode'}
         </label>
         <select
           id="mob-mode"
           value={mobility.mode}
           onChange={(e) => update('mode', e.target.value as MobilityProfile['mode'])}
-          className="w-full rounded-control border border-line bg-surface p-2 text-ink"
+          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="metro">{isHi ? 'मेट्रो' : 'Metro Rail'}</option>
           <option value="two-wheeler">{isHi ? 'दोपहिया (बाइक/स्कूटर)' : 'Two-Wheeler (Bike/Scooter)'}</option>
@@ -39,14 +39,14 @@ export function StepMobility({ mobility, onChange, lang = 'en' }: StepMobilityPr
       </div>
 
       <div>
-        <label htmlFor="mob-distance" className="block font-semibold text-ink mb-1">
+        <label htmlFor="mob-distance" className="block text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-1">
           {isHi ? 'दूरी का दायरा' : 'Commute Distance'}
         </label>
         <select
           id="mob-distance"
           value={mobility.distance}
           onChange={(e) => update('distance', e.target.value as MobilityProfile['distance'])}
-          className="w-full rounded-control border border-line bg-surface p-2 text-ink"
+          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="short">{isHi ? 'कम (<5 किमी)' : 'Short (<5 km)'}</option>
           <option value="mid">{isHi ? 'मध्यम (5-15 किमी)' : 'Mid (5-15 km)'}</option>
@@ -55,7 +55,7 @@ export function StepMobility({ mobility, onChange, lang = 'en' }: StepMobilityPr
       </div>
 
       <div>
-        <label htmlFor="mob-wfh" className="block font-semibold text-ink mb-1">
+        <label htmlFor="mob-wfh" className="block text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-1">
           {isHi ? 'घर से काम (WFH दिन/सप्ताह)' : 'Work From Home (Days/week)'}
         </label>
         <input
@@ -65,28 +65,28 @@ export function StepMobility({ mobility, onChange, lang = 'en' }: StepMobilityPr
           max="7"
           value={mobility.wfhDays}
           onChange={(e) => update('wfhDays', parseInt(e.target.value, 10) || 0)}
-          className="w-full rounded-control border border-line bg-surface p-2 text-ink"
+          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink tabular-nums shadow-xs focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30"
         />
       </div>
 
       <div className="flex flex-col justify-end space-y-2 pt-1">
-        <label className="flex items-center gap-2 cursor-pointer text-ink">
+        <label className="flex items-center gap-2 cursor-pointer text-ink font-medium select-none p-2 rounded-control border border-line/50 hover:bg-haze/30">
           <input
             type="checkbox"
             checked={mobility.exercisesOutdoors}
             onChange={(e) => update('exercisesOutdoors', e.target.checked)}
-            className="rounded text-sky focus:ring-sky"
+            className="rounded border-line text-sky focus:ring-sky/30"
           />
-          <span>{isHi ? 'सुबह बाहर टहलना / व्यायाम' : 'Outdoor Morning Walk / Exercise'}</span>
+          <span className="text-xs">{isHi ? 'सुबह बाहर टहलना / व्यायाम' : 'Outdoor Morning Walk / Exercise'}</span>
         </label>
-        <label className="flex items-center gap-2 cursor-pointer text-ink">
+        <label className="flex items-center gap-2 cursor-pointer text-ink font-medium select-none p-2 rounded-control border border-line/50 hover:bg-haze/30">
           <input
             type="checkbox"
             checked={mobility.schoolAge}
             onChange={(e) => update('schoolAge', e.target.checked)}
-            className="rounded text-sky focus:ring-sky"
+            className="rounded border-line text-sky focus:ring-sky/30"
           />
-          <span>{isHi ? 'स्कूल जाने वाले बच्चे हैं' : 'Has School-Going Children'}</span>
+          <span className="text-xs">{isHi ? 'स्कूल जाने वाले बच्चे हैं' : 'Has School-Going Children'}</span>
         </label>
       </div>
     </div>

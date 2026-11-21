@@ -34,17 +34,17 @@ export function StepMembers({ members, onChange, lang = 'en' }: StepMembersProps
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3.5">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-semibold text-ink">
+        <label className="text-xs font-bold uppercase tracking-wider text-ink-muted">
           {isHi ? 'परिवार के सदस्य' : 'Household Members'}
         </label>
         <button
           type="button"
           onClick={addMember}
-          className="rounded-control bg-sky/10 px-2.5 py-1 text-xs font-semibold text-sky hover:bg-sky/20"
+          className="inline-flex items-center gap-1 rounded-control bg-sky/10 hover:bg-sky/20 border border-sky/20 px-2.5 py-1 text-xs font-semibold text-sky-deep transition-all active:scale-[0.98]"
         >
-          {isHi ? '+ सदस्य जोड़ें' : '+ Add Member'}
+          <span>{isHi ? '+ सदस्य जोड़ें' : '+ Add Member'}</span>
         </button>
       </div>
 
@@ -52,15 +52,17 @@ export function StepMembers({ members, onChange, lang = 'en' }: StepMembersProps
         {members.map((member, index) => (
           <div
             key={index}
-            className="flex flex-wrap items-center justify-between gap-2 rounded-control border border-line bg-surface p-2.5 text-xs"
+            className="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line/70 bg-surface/80 p-2.5 text-xs shadow-xs"
           >
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-ink-muted">#{index + 1}</span>
+            <div className="flex items-center gap-2.5">
+              <span className="h-5 w-5 rounded-full bg-haze flex items-center justify-center font-bold text-[11px] text-ink-muted">
+                {index + 1}
+              </span>
               <select
                 aria-label={`Member ${index + 1} age band`}
                 value={member.band}
                 onChange={(e) => updateMember(index, { band: e.target.value as Member['band'] })}
-                className="rounded-control border border-line bg-surface px-2 py-1 text-ink"
+                className="rounded-control border border-line/70 bg-surface px-2.5 py-1.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30"
               >
                 {BANDS.map((b) => (
                   <option key={b.key} value={b.key}>
@@ -71,21 +73,21 @@ export function StepMembers({ members, onChange, lang = 'en' }: StepMembersProps
             </div>
 
             <div className="flex items-center gap-3">
-              <label className="flex items-center gap-1.5 cursor-pointer text-ink">
+              <label className="flex items-center gap-1.5 cursor-pointer text-ink font-medium select-none">
                 <input
                   type="checkbox"
                   checked={!!member.sensitive}
                   onChange={(e) => updateMember(index, { sensitive: e.target.checked })}
-                  className="rounded text-sky focus:ring-sky"
+                  className="rounded border-line text-sky focus:ring-sky/30"
                 />
-                <span>{isHi ? 'सांस / दमा संवेदनशीलता' : 'Asthma / Sensitivity'}</span>
+                <span className="text-xs">{isHi ? 'सांस / दमा संवेदनशीलता' : 'Asthma / Sensitivity'}</span>
               </label>
 
               {members.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeMember(index)}
-                  className="text-danger-text hover:underline"
+                  className="text-danger-text/80 hover:text-danger-text text-xs font-semibold hover:underline"
                   aria-label={`Remove member ${index + 1}`}
                 >
                   {isHi ? 'हटाएं' : 'Remove'}
