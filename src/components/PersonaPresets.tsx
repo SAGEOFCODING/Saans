@@ -39,17 +39,25 @@ const PRESET_LABELS: Record<PresetKey, { en: string; hi: string; subtitleEn: str
 };
 
 export function PersonaPresets({ onSelectPreset, lang = 'en' }: PersonaPresetsProps) {
+  const [selectedPresetName, setSelectedPresetName] = React.useState<string | null>(null);
   const isHi = lang === 'hi';
 
   const handleClick = (key: PresetKey) => {
     const raw = (presetsData as Record<string, { name: string; household: Household }>)[key];
     if (raw?.household) {
+      setSelectedPresetName(PRESET_LABELS[key][isHi ? 'hi' : 'en']);
       onSelectPreset(raw.household, raw.name);
     }
   };
 
   return (
     <div className="my-4">
+      <div aria-live="polite" className="sr-only">
+        {selectedPresetName &&
+          (isHi
+            ? `चुना गया प्रोफाइल: ${selectedPresetName}`
+            : `Switched to preset: ${selectedPresetName}`)}
+      </div>
       <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink-muted">
         {isHi ? 'त्वरित प्रोफाइल चुनें:' : 'Quick Household Presets:'}
       </p>

@@ -52,13 +52,13 @@
     --aqi-satisfactory: #7BB829;
     --aqi-moderate: #F7D566;
     --aqi-poor: #F59338;
-    --aqi-verypoor: #E54848;
-    --aqi-very-poor: #E54848;
-    --aqi-severe: #B83A61;
+    --aqi-verypoor: #F87171;
+    --aqi-very-poor: #F87171;
+    --aqi-severe: #DE537E;
 
     --gain: #2EB35A;
     --caution: #F59338;
-    --danger-text: #E54848;
+    --danger-text: #F87171;
   }
 }
 
@@ -71,6 +71,18 @@
   --sky: #5CC0DE;
   --sky-deep: #8ED3E8;
   --on-sky: #071217;
+
+  --aqi-good: #2EB35A;
+  --aqi-satisfactory: #7BB829;
+  --aqi-moderate: #F7D566;
+  --aqi-poor: #F59338;
+  --aqi-verypoor: #F87171;
+  --aqi-very-poor: #F87171;
+  --aqi-severe: #DE537E;
+
+  --gain: #2EB35A;
+  --caution: #F59338;
+  --danger-text: #F87171;
 }
 
 body {

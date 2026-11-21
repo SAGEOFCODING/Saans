@@ -9,6 +9,7 @@ import { useWhatIf } from '@/hooks/useWhatIf';
 import { loadSessionItem, saveSessionItem } from '@/lib/storage';
 import { ModeBanner } from './ModeBanner';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 import { HazeHero } from './HazeHero';
 import { StatusStrip } from './StatusStrip';
 import { HourlyStrip } from './HourlyStrip';
@@ -80,6 +81,7 @@ export function SaansApp({ initialAir }: SaansAppProps) {
           </p>
         </div>
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <LanguageSwitcher currentLang={lang} onLangChange={setLang} />
           <button
             id="chat-trigger"
@@ -111,6 +113,19 @@ export function SaansApp({ initialAir }: SaansAppProps) {
         loading={loading}
         lang={lang}
       />
+
+      {/* Screen Reader Live Status for Plan Generation */}
+      <div aria-live="polite" className="sr-only">
+        {loading
+          ? (lang === 'hi'
+              ? 'आपकी दैनिक स्वच्छ-वायु योजना बनाई जा रही है...'
+              : 'Generating your personalized clean-air plan...')
+          : plan
+          ? (lang === 'hi'
+              ? `स्वच्छ-वायु योजना तैयार है: ${plan.blocks.length} समय-खंड और अनुशंसित उपाय।`
+              : `Clean-air plan ready: ${plan.blocks.length} schedule blocks with recommended actions.`)
+          : ''}
+      </div>
 
       {error && (
         <div className="my-4 rounded-panel border border-danger-text/30 bg-danger-text/10 p-4 text-xs font-semibold text-danger-text">

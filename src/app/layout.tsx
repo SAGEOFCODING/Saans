@@ -34,7 +34,9 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <div id="main-content">{children}</div>
+        <main id="main-content" tabIndex={-1} className="focus:outline-none">
+          {children}
+        </main>
       </body>
     </html>
   );
