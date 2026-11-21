@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Build artifacts
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Environment
+.env
+.env*.local
+.env.development
+.env.test
+.env.production
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / Editor
+.DS_Store
+*.pem
+Thumbs.db
+.vscode/
+.idea/

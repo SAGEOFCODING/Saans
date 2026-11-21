@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --haze: #EDF0F1;
+  --surface: #FFFFFF;
+  --line: #CBD5DA;
+  --ink: #10222B;
+  --ink-muted: #4A5C66;
+  --sky: #0E6E8C;
+  --sky-deep: #0A4C61;
+  --on-sky: #FFFFFF;
+
+  --aqi-good: #1B7F3B;
+  --aqi-satisfactory: #4F7A12;
+  --aqi-moderate: #F2C230;
+  --aqi-poor: #E8730C;
+  --aqi-verypoor: #C62828;
+  --aqi-severe: #7B1E3A;
+
+  --gain: #17794A;
+  --caution: #C46200;
+  --danger-text: #A61B1B;
+}
+
+.dark {
+  --haze: #0C1A21;
+  --surface: #14262F;
+  --line: #2B414C;
+  --ink: #E8EEF0;
+  --ink-muted: #A9BAC2;
+  --sky: #5CC0DE;
+  --sky-deep: #8ED3E8;
+  --on-sky: #071217;
+
+  --aqi-good: #2EB35A;
+  --aqi-satisfactory: #7BB829;
+  --aqi-moderate: #F7D566;
+  --aqi-poor: #F59338;
+  --aqi-verypoor: #E54848;
+  --aqi-severe: #B83A61;
+
+  --gain: #2EB35A;
+  --caution: #F59338;
+  --danger-text: #E54848;
+}
+
+body {
+  background-color: var(--haze);
+  color: var(--ink);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
