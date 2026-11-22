@@ -7,9 +7,9 @@ export function ThemeToggle() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const stored = localStorage.getItem('saans_theme');
-      const active = stored ? stored === 'dark' : prefersDark;
+      // Default to crisp clinical light mode unless the user explicitly requested dark
+      const active = stored === 'dark';
       setIsDark(active);
       document.documentElement.classList.toggle('dark', active);
     }

@@ -74,22 +74,22 @@ export function SaansApp({ initialAir }: SaansAppProps) {
   return (
     <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8 space-y-6">
       {/* Top Header */}
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line/40 pb-5">
-        <div className="flex items-center gap-3">
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line/20 pb-5 pt-1">
+        <div className="flex items-center gap-3.5">
           {/* Logo Mark */}
-          <div className="h-9 w-9 rounded-control bg-sky text-on-sky flex items-center justify-center font-bold shadow-xs">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <div className="h-10 w-10 rounded-2xl bg-sky text-on-sky flex items-center justify-center font-bold shadow-xs">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
               <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
               <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
             </svg>
           </div>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <h1 className="text-2xl sm:text-3xl font-extrabold font-display tracking-tight text-ink">
                 Saans (सांस)
               </h1>
-              <span className="hidden sm:inline-flex items-center gap-1 rounded-chip bg-gain/10 border border-gain/20 px-2 py-0.5 text-[10px] font-semibold text-gain">
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-chip bg-gain/10 border border-gain/20 px-2.5 py-0.5 text-[11px] font-semibold text-gain shadow-xs">
                 <span className="h-1.5 w-1.5 rounded-full bg-gain animate-pulse" />
                 <span>Delhi NCR Live</span>
               </span>
@@ -110,7 +110,7 @@ export function SaansApp({ initialAir }: SaansAppProps) {
             id="chat-trigger"
             type="button"
             onClick={() => setChatOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-control bg-sky px-3.5 py-1.5 text-xs font-bold text-on-sky shadow-xs hover:bg-sky-deep focus:ring-2 focus:ring-sky transition-all active:scale-[0.98]"
+            className="inline-flex items-center gap-1.5 rounded-control bg-sky px-4 py-2 text-xs font-bold text-on-sky shadow-xs hover:bg-sky-deep focus:ring-2 focus:ring-sky transition-all active:scale-[0.98]"
             aria-label="Open AI advisor chat"
           >
             <ChatIcon size={15} />

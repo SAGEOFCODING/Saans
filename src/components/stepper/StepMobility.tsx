@@ -26,7 +26,7 @@ export function StepMobility({ mobility, onChange, lang = 'en' }: StepMobilityPr
           id="mob-mode"
           value={mobility.mode}
           onChange={(e) => update('mode', e.target.value as MobilityProfile['mode'])}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="metro">{isHi ? 'मेट्रो' : 'Metro Rail'}</option>
           <option value="two-wheeler">{isHi ? 'दोपहिया (बाइक/स्कूटर)' : 'Two-Wheeler (Bike/Scooter)'}</option>
@@ -46,7 +46,7 @@ export function StepMobility({ mobility, onChange, lang = 'en' }: StepMobilityPr
           id="mob-distance"
           value={mobility.distance}
           onChange={(e) => update('distance', e.target.value as MobilityProfile['distance'])}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="short">{isHi ? 'कम (<5 किमी)' : 'Short (<5 km)'}</option>
           <option value="mid">{isHi ? 'मध्यम (5-15 किमी)' : 'Mid (5-15 km)'}</option>

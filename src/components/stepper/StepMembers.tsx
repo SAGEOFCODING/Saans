@@ -52,7 +52,7 @@ export function StepMembers({ members, onChange, lang = 'en' }: StepMembersProps
         {members.map((member, index) => (
           <div
             key={index}
-            className="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line/70 bg-surface/80 p-2.5 text-xs shadow-xs"
+            className="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line/30 bg-surface/90 p-3 text-xs shadow-xs"
           >
             <div className="flex items-center gap-2.5">
               <span className="h-5 w-5 rounded-full bg-haze flex items-center justify-center font-bold text-[11px] text-ink-muted">
@@ -62,7 +62,7 @@ export function StepMembers({ members, onChange, lang = 'en' }: StepMembersProps
                 aria-label={`Member ${index + 1} age band`}
                 value={member.band}
                 onChange={(e) => updateMember(index, { band: e.target.value as Member['band'] })}
-                className="rounded-control border border-line/70 bg-surface px-2.5 py-1.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30"
+                className="rounded-control border border-line/30 bg-surface px-3 py-1.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
               >
                 {BANDS.map((b) => (
                   <option key={b.key} value={b.key}>

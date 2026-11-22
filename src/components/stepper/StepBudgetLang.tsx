@@ -23,7 +23,7 @@ export function StepBudgetLang({ budget, langPref, onChange, lang = 'en' }: Step
           id="budget-tier"
           value={budget}
           onChange={(e) => onChange({ budget: e.target.value as Household['budget'] })}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs text-ink font-medium focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs text-ink font-medium focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="free">{isHi ? 'निःशुल्क (₹0 केवल आदतें/DIY)' : 'Free (₹0 habits & DIY only)'}</option>
           <option value="low">{isHi ? 'कम खर्च (<₹2,000 N95, DIY फिल्टर)' : 'Low Cost (<₹2,000 N95, DIY filter)'}</option>
@@ -44,7 +44,7 @@ export function StepBudgetLang({ budget, langPref, onChange, lang = 'en' }: Step
           id="lang-pref"
           value={langPref}
           onChange={(e) => onChange({ lang: e.target.value as Household['lang'] })}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs text-ink font-medium focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs text-ink font-medium focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="en">English</option>
           <option value="hi">हिंदी (Hindi)</option>

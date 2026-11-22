@@ -53,32 +53,32 @@ export function HouseholdStepper({
   };
 
   return (
-    <div className="rounded-panel border border-line/40 bg-surface/85 backdrop-blur-md p-4 sm:p-6 shadow-xs transition-all">
+    <div className="rounded-panel border border-line/30 bg-surface/90 backdrop-blur-md p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all">
       {/* Header and Step Indicator */}
-      <div className="mb-4 flex items-center justify-between border-b border-line/30 pb-3">
+      <div className="mb-5 flex items-center justify-between border-b border-line/20 pb-3.5">
         <div>
-          <h2 className="text-sm sm:text-base font-bold text-ink tracking-tight">
+          <h2 className="text-base sm:text-lg font-bold text-ink tracking-tight font-display">
             {isHi ? 'परिवार का विवरण और दैनिक संदर्भ' : 'Household Profile & Daily Context'}
           </h2>
-          <span className="text-[11px] text-ink-muted">
+          <span className="text-xs text-ink-muted">
             {STEP_TITLES[activeStep - 1][isHi ? 'hi' : 'en']}
           </span>
         </div>
-        <span className="rounded-chip bg-haze px-2.5 py-0.5 text-xs font-semibold text-ink-muted">
+        <span className="rounded-chip bg-haze px-3 py-1 text-xs font-semibold text-ink-muted">
           {isHi ? `चरण ${activeStep} / 5` : `Step ${activeStep} of 5`}
         </span>
       </div>
 
       {/* Progress Bar Segments */}
-      <div className="mb-5 flex gap-1.5" role="tablist" aria-label="Wizard Steps">
+      <div className="mb-6 flex gap-2" role="tablist" aria-label="Wizard Steps">
         {[1, 2, 3, 4, 5].map((s) => (
           <button
             key={s}
             type="button"
             role="tab"
             onClick={() => setActiveStep(s)}
-            className={`h-1.5 flex-1 rounded-full transition-all duration-200 ${
-              s === activeStep ? 'bg-sky' : s < activeStep ? 'bg-sky/40' : 'bg-line/60 hover:bg-line'
+            className={`h-2 flex-1 rounded-full transition-all duration-200 ${
+              s === activeStep ? 'bg-sky shadow-xs' : s < activeStep ? 'bg-sky/40' : 'bg-line/40 hover:bg-line/60'
             }`}
             aria-label={`${s}. ${STEP_TITLES[s - 1][isHi ? 'hi' : 'en']}`}
             aria-selected={s === activeStep}

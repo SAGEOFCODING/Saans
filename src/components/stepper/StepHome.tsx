@@ -26,7 +26,7 @@ export function StepHome({ home, onChange, lang = 'en' }: StepHomeProps) {
           id="home-type"
           value={home.type}
           onChange={(e) => update('type', e.target.value as HomeProfile['type'])}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="apartment">{isHi ? 'अपार्टमेंट / फ्लैट' : 'Apartment / Flat'}</option>
           <option value="house">{isHi ? 'स्वतंत्र मकान' : 'Independent House'}</option>
@@ -41,7 +41,7 @@ export function StepHome({ home, onChange, lang = 'en' }: StepHomeProps) {
           id="home-floor"
           value={home.floor}
           onChange={(e) => update('floor', e.target.value as HomeProfile['floor'])}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="low">{isHi ? 'निचली (भू/1)' : 'Low (Ground/1st)'}</option>
           <option value="mid">{isHi ? 'मध्यम (2-6)' : 'Mid (2nd-6th)'}</option>
@@ -57,7 +57,7 @@ export function StepHome({ home, onChange, lang = 'en' }: StepHomeProps) {
           id="home-windows"
           value={home.windows}
           onChange={(e) => update('windows', e.target.value as HomeProfile['windows'])}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="leaky">{isHi ? 'हवा रिसती है (ड्राफ्ट)' : 'Leaky / Noticeable Drafts'}</option>
           <option value="tight">{isHi ? 'सील बंद (टाइट)' : 'Tight / Weather-Sealed'}</option>
@@ -72,7 +72,7 @@ export function StepHome({ home, onChange, lang = 'en' }: StepHomeProps) {
           id="home-purifier"
           value={home.purifier}
           onChange={(e) => update('purifier', e.target.value as HomeProfile['purifier'])}
-          className="w-full rounded-control border border-line/70 bg-surface p-2 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
+          className="w-full rounded-control border border-line/30 bg-surface p-2.5 text-xs font-medium text-ink focus:border-sky focus:outline-none focus:ring-1 focus:ring-sky/30 shadow-xs"
         >
           <option value="none">{isHi ? 'कोई नहीं' : 'None'}</option>
           <option value="bedroom">{isHi ? 'बेडरूम में' : 'Bedroom only'}</option>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Mukta:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Mukta:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -38,48 +38,14 @@
   --caution: #8A5A00;
   --danger-text: #9B1C1C;
 
-  --skyline-sky-1: #94A8B3;
-  --skyline-sky-2: #B8CBD3;
-  --skyline-sky-3: #DCE5E8;
-  --skyline-haze: #CCD6DA;
-  --skyline-far: #68828F;
-  --skyline-mid: #3B5461;
-  --skyline-near: #1F3642;
-  --skyline-sun: #FFF7DF;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --haze: #0C1A21;
-    --surface: #14262F;
-    --line: #2B414C;
-    --ink: #E8EEF0;
-    --ink-muted: #A9BAC2;
-    --sky: #5CC0DE;
-    --sky-deep: #8ED3E8;
-    --on-sky: #071217;
-
-    --aqi-good: #2EB35A;
-    --aqi-satisfactory: #7BB829;
-    --aqi-moderate: #F7D566;
-    --aqi-poor: #F59338;
-    --aqi-verypoor: #F87171;
-    --aqi-very-poor: #F87171;
-    --aqi-severe: #DE537E;
-
-    --gain: #2EB35A;
-    --caution: #F59338;
-    --danger-text: #F87171;
-
-    --skyline-sky-1: #0A1920;
-    --skyline-sky-2: #102631;
-    --skyline-sky-3: #183340;
-    --skyline-haze: #132833;
-    --skyline-far: #2D4C5C;
-    --skyline-mid: #41687B;
-    --skyline-near: #5A8398;
-    --skyline-sun: #F59E0B;
-  }
+  --skyline-sky-1: #38BDF8;
+  --skyline-sky-2: #BAE6FD;
+  --skyline-sky-3: #F0F9FF;
+  --skyline-haze: #E2E8F0;
+  --skyline-far: #94A3B8;
+  --skyline-mid: #475569;
+  --skyline-near: #1E293B;
+  --skyline-sun: #FEF08A;
 }
 
 .dark {
@@ -104,14 +70,14 @@
   --caution: #F59338;
   --danger-text: #F87171;
 
-  --skyline-sky-1: #0A1920;
-  --skyline-sky-2: #102631;
-  --skyline-sky-3: #183340;
-  --skyline-haze: #132833;
-  --skyline-far: #2D4C5C;
-  --skyline-mid: #41687B;
-  --skyline-near: #5A8398;
-  --skyline-sun: #F59E0B;
+  --skyline-sky-1: #0369A1;
+  --skyline-sky-2: #0C4A6E;
+  --skyline-sky-3: #0B1120;
+  --skyline-haze: #0F172A;
+  --skyline-far: #334155;
+  --skyline-mid: #475569;
+  --skyline-near: #64748B;
+  --skyline-sun: #FDE047;
 }
 
 html {

@@ -48,9 +48,9 @@ export function HourlyStrip({ hourly, bestWindow, worstWindow, lang = 'en' }: Ho
   return (
     <section
       aria-label={lang === 'hi' ? '24 घंटे का वायु पूर्वानुमान' : '24-hour PM2.5 forecast'}
-      className="my-4 rounded-panel border border-line/40 bg-surface/80 backdrop-blur-sm p-4 sm:p-5 shadow-xs transition-all"
+      className="my-5 rounded-panel border border-line/30 bg-surface/90 backdrop-blur-md p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all"
     >
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-3.5 border-b border-line/20 pb-2.5">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-line/20 pb-3">
         <div>
           <h3 className="text-sm font-bold text-ink tracking-tight font-display">
             {lang === 'hi' ? '24 घंटे का वायु पूर्वानुमान' : '24-Hour Forecast & Cleanest Window'}

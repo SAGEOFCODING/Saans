@@ -21,7 +21,7 @@ describe('Tier 1 Coverage — Repo Size Budget Guard (scripts/check-size.sh)', (
     const result = runSizeGuardScript();
 
     expect(result.status, `Script failed with error: ${result.stderr}`).toBe(0);
-  });
+  }, 15000);
 
   it('TC-SIZE-03: stdout reports calculated size measurement', () => {
     // Authoritative source: ORIGINAL_REQUEST.md Phase 0

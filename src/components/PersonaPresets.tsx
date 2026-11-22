@@ -70,7 +70,7 @@ export function PersonaPresets({ onSelectPreset, lang = 'en' }: PersonaPresetsPr
           {isHi ? '1-क्लिक में फॉर्म भरें' : '1-click to simulate persona'}
         </span>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {(['priya', 'mehta', 'rohan', 'anil'] as PresetKey[]).map((key) => {
           const item = PRESET_LABELS[key];
           const isSelected = selectedPresetKey === key;
@@ -79,15 +79,15 @@ export function PersonaPresets({ onSelectPreset, lang = 'en' }: PersonaPresetsPr
               key={key}
               type="button"
               onClick={() => handleClick(key)}
-              className={`group flex items-start gap-2.5 rounded-control border p-3 text-left transition-all duration-150 active:scale-[0.98] ${
+              className={`group flex items-start gap-3 rounded-panel border p-3.5 text-left transition-all duration-150 active:scale-[0.98] ${
                 isSelected
-                  ? 'border-sky bg-sky/10 shadow-xs ring-1 ring-sky/30'
-                  : 'border-line/40 bg-surface/80 hover:border-sky/40 hover:bg-surface hover:shadow-xs'
+                  ? 'border-sky bg-sky/5 shadow-xs ring-1.5 ring-sky/40'
+                  : 'border-line/30 bg-surface/90 hover:border-sky/40 hover:bg-surface hover:shadow-xs'
               }`}
             >
               <div
-                className={`h-7 w-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold transition-colors ${
-                  isSelected ? 'bg-sky text-on-sky' : 'bg-haze text-ink group-hover:bg-sky/15 group-hover:text-sky-deep'
+                className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold transition-all ${
+                  isSelected ? 'bg-sky text-on-sky shadow-xs scale-105' : 'bg-haze text-ink group-hover:bg-sky/15 group-hover:text-sky-deep'
                 }`}
                 aria-hidden="true"
               >

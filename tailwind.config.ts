@@ -53,6 +53,15 @@ const config: Config = {
           '"Noto Sans Devanagari"',
           'sans-serif',
         ],
+        sans: [
+          '"Mukta"',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          '"Noto Sans Devanagari"',
+          'sans-serif',
+        ],
         mono: [
           '"JetBrains Mono"',
           'ui-monospace',
