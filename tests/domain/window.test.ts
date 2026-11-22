@@ -89,5 +89,26 @@ describe('Domain: Sliding Window & Stagnation Detection (Feature 10)', () => {
         at: '2026-11-21T14:00:00Z',
       })
     ).toBe(false);
+
+    // Local time string format (as returned by Open-Meteo &timezone=auto)
+    // Afternoon (13:00) with temp > 12C is not stagnant
+    expect(
+      detectStagnation({
+        windKmh: 4.0,
+        tempC: 18,
+        rh: 70,
+        at: '2026-11-21T13:00',
+      })
+    ).toBe(false);
+
+    // Early morning (06:00) with temp > 12C is stagnant due to morning boundary layer trapping
+    expect(
+      detectStagnation({
+        windKmh: 4.0,
+        tempC: 18,
+        rh: 70,
+        at: '2026-11-21T06:00',
+      })
+    ).toBe(true);
   });
 });

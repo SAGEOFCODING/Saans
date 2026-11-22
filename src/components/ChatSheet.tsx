@@ -26,6 +26,13 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
   const isHi = lang === 'hi';
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messages.length > 0 || isStreaming) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isStreaming]);
 
   // Focus management & Escape key trap
   useEffect(() => {
@@ -168,6 +175,7 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
             </div>
           )}
           {error && <div className="text-xs text-danger-text pl-2">{error}</div>}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Hidden screen-reader announcement for streamed response completion */}

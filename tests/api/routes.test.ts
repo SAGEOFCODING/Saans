@@ -4,6 +4,7 @@ import { GET as healthHandler } from '../../src/app/api/health/route';
 import { GET as geocodeHandler } from '../../src/app/api/geocode/route';
 import { GET as airHandler } from '../../src/app/api/air/route';
 import { POST as planHandler } from '../../src/app/api/plan/route';
+import { POST as chatHandler } from '../../src/app/api/chat/route';
 import { resetRateLimits } from '../../src/services/rateLimit';
 import { airCache } from '../../src/services/cache';
 import presetsData from '../../src/data/presets.json';
@@ -286,6 +287,69 @@ describe('API Route Handlers (src/app/api/*)', () => {
 
       expect(lastRes?.status).toBe(429);
       expect(lastRes?.headers.get('retry-after')).toBeTruthy();
+      const body = await lastRes?.json();
+      expect(body.error.code).toBe('RATE_LIMIT_EXCEEDED');
+    });
+  });
+
+  describe('POST /api/chat', () => {
+    it('returns SSE event-stream for valid conversation input', async () => {
+      const req = new NextRequest('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          household: presetsData.priya.household,
+          location: { lat: 28.61, lon: 77.21 },
+          messages: [{ role: 'user', content: 'Is it safe to run at 7 am?' }],
+        }),
+      });
+
+      const res = await chatHandler(req);
+      expect(res.status).toBe(200);
+      expect(res.headers.get('content-type')).toContain('text/event-stream');
+    });
+
+    it('rejects requests with more than 20 messages with HTTP 400', async () => {
+      const excessMessages = Array.from({ length: 21 }).map((_, i) => ({
+        role: i % 2 === 0 ? ('user' as const) : ('assistant' as const),
+        content: `Message ${i}`,
+      }));
+
+      const req = new NextRequest('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          household: presetsData.priya.household,
+          location: { lat: 28.61, lon: 77.21 },
+          messages: excessMessages,
+        }),
+      });
+
+      const res = await chatHandler(req);
+      expect(res.status).toBe(400);
+      const body = await res.json();
+      expect(body.error.code).toBe('VALIDATION_ERROR');
+    });
+
+    it('enforces chat rate limit (10/min) returning HTTP 429', async () => {
+      const ip = '10.99.88.77';
+      let lastRes: Response | null = null;
+
+      for (let i = 0; i < 15; i++) {
+        const req = new NextRequest('http://localhost:3000/api/chat', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-forwarded-for': ip },
+          body: JSON.stringify({
+            household: presetsData.priya.household,
+            location: { lat: 28.61, lon: 77.21 },
+            messages: [{ role: 'user', content: 'What is the air quality now?' }],
+          }),
+        });
+        lastRes = await chatHandler(req);
+        if (lastRes.status === 429) break;
+      }
+
+      expect(lastRes?.status).toBe(429);
       const body = await lastRes?.json();
       expect(body.error.code).toBe('RATE_LIMIT_EXCEEDED');
     });

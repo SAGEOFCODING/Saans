@@ -57,7 +57,7 @@ export function useChat(household: Household, location: Location) {
           body: JSON.stringify({
             household,
             location,
-            messages: [...messages, userMsg],
+            messages: [...messages.slice(-18), userMsg],
           }),
         });
 

@@ -3,8 +3,15 @@ import regionsData from '../data/regions.json';
 
 function isNightOrEarlyHour(at?: string | Date): boolean {
   if (!at) return true;
+  if (typeof at === 'string') {
+    const match = at.match(/T(\d{2}):/);
+    if (match) {
+      const h = parseInt(match[1], 10);
+      return regionsData.stagnation.nightEarlyHours.includes(h);
+    }
+  }
   const d = typeof at === 'string' ? new Date(at) : at;
-  const h = d.getUTCHours();
+  const h = d.getHours();
   return regionsData.stagnation.nightEarlyHours.includes(h);
 }
 
