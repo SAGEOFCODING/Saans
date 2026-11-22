@@ -1,18 +1,46 @@
-# Saans (सांस) — Clean-Air Copilot
+# Saans (साँस) — Clean-Air Copilot
 
-A GenAI-powered clean-air copilot designed for families and communities navigating severe winter smog and urban air pollution in northern India (Delhi-NCR and the Indo-Gangetic Plain).
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-saans--one.vercel.app-005c55?style=for-the-badge&logo=vercel)](https://saans-one.vercel.app/)
+[![Tests Passing](https://img.shields.io/badge/Vitest-177%20Passed-22c55e?style=for-the-badge&logo=vitest)](https://github.com/SAGEOFCODING/Saans)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
+A GenAI-powered clean-air copilot designed for families and communities navigating severe winter smog and urban air pollution across northern India (Delhi-NCR and the Indo-Gangetic Plain).
 
 Saans provides hyper-personalized, low-emission daily routines, actionable indoor air quality hacks, and sustainable living alternatives tailored to household microenvironments and budgets, clearly explaining the direct personal and collective impact of every choice.
 
+🌐 **Live Production URL:** [https://saans-one.vercel.app/](https://saans-one.vercel.app/)  
+📂 **GitHub Repository:** [https://github.com/SAGEOFCODING/Saans](https://github.com/SAGEOFCODING/Saans)
+
 ---
 
-## 1. Chosen Vertical
+## 1. What Saans Does & Does NOT Do
+
+### ✅ What Saans Does
+- **Pinpoints Cleanest Ventilation Windows:** Analyzes 24-hour diurnal atmospheric curves to find the exact 1–2 hour afternoon "valley" when boundary-layer inversion lifts, allowing safe natural room airing without letting peak smog inside.
+- **Calibrates Household Vulnerability:** Calculates physical risk tiers across 5 age/health profiles (infants, asthmatic elders, school-goers, active commuters) and evaluates infiltration by floor level and building air-tightness.
+- **Generates Actionable Diurnal Routines:** Translates raw pollution numbers into time-blocked, zero-cost to low-cost interventions (e.g., morning walk indoor shifts, kitchen exhaust timing, wet mopping over dry sweeping, DIY box-fan filtration).
+- **Tracks Delhi-NCR GRAP Mandates in Real Time:** Monitors statutory Graded Response Action Plan (Stages I to IV) based on ambient AQI, detailing citizen actions, vehicle restrictions (BS-III/BS-IV bans), and construction halts.
+- **Simulates Instant Client-Side "What-If" Scenarios:** Pure in-browser recalculation (<100ms) with zero network requests—instantly showing marginal exposure cuts and avoided $CO_2e$ when toggling purifiers, N95 masks, or transit swaps.
+- **Provides Grounded Bilingual GenAI Guidance:** Google Gemini (`gemini-3.5-flash-lite`) streams live answers via Server-Sent Events (SSE) in English and authentic Devanagari Hindi, strictly bounded by deterministic domain facts.
+- **Powers RWA Collective Community Action:** Aggregates emissions reductions and avoided biomass burning across 10 to 500 households with one-click copyable WhatsApp/RWA circulars.
+- **Guarantees 100% Offline Capability:** Runs completely out-of-the-box without requiring an API key, automatically falling back to vetted deterministic rule templates.
+
+### ❌ What Saans Does NOT Do
+- ❌ **No Medical Diagnoses or Drug Dosages:** Saans is an environmental lifestyle and exposure planning tool, **explicitly not a clinical diagnostic device**. It never diagnoses ailments or prescribes inhaler/medicine dosages. Any input mentioning severe acute symptoms (e.g. chest pain, breathing difficulty, blue lips) immediately returns emergency helpline guidance.
+- ❌ **No Commercial Purifier Upselling:** Saans does not push proprietary purifiers or affiliate hardware. It champions free behavioral swaps and DIY Box-Fan filters (~₹1,500 vs. ₹15,000+ commercial purifiers) for low- and mid-budget households.
+- ❌ **No Number Hallucinations:** The LLM is prohibited from inventing AQI values, PM2.5 readings, time windows, or exposure percentages. All numbers must strictly originate from the deterministic domain FACTS engine.
+- ❌ **No User Tracking or Health Profiling:** No databases, no tracking cookies, and no user accounts. GPS coordinates are rounded to 2 decimal places before processing, and raw health flags are never sent to the LLM or stored on servers.
+- ❌ **No Blind Inaction / Panic:** Unlike commercial AQI apps that merely show alarming maroon numbers with vague *"stay indoors"* warnings, Saans provides specific, timed, and budget-gated actions for non-airtight homes.
+
+---
+
+## 2. Chosen Vertical
 **Environment & Sustainability — urban air quality for families and communities**  
 *(Aligned directly with the Prompt Wars Challenge 6 Hackathon Rubric)*
 
 ---
 
-## 2. Problem Statement & Why It Matters
+## 3. Problem Statement & Why It Matters
 
 Every winter (October through February), the Indo-Gangetic Plain experiences severe hazardous smog episodes. A confluence of post-monsoon agricultural crop-residue burning, low surface temperatures, atmospheric boundary layer temperature inversions, calm surface winds (stagnation), and trapped vehicular/industrial emissions pushes the Air Quality Index (AQI) into the **Severe (400–500+)** range.
 
@@ -135,9 +163,15 @@ Saans maps directly to the four core challenges outlined in the challenge statem
 │   │       ├── chat/route.ts      # Streaming SSE conversational advisor
 │   │       └── health/route.ts    # Health status and active LLM provider
 │   ├── components/            # Accessible presentational & interactive UI
-│   │   ├── HazeHero.tsx           # Flat SVG skyline fading under dynamic smog layer
+│   │   ├── AppHeader.tsx          # Top navigation, auto-location chip, lang toggle
+│   │   ├── HazeHero.tsx           # Atmospheric glass outdoor telemetry & 4-pill strip
+│   │   ├── CleanWindowBanner.tsx  # Luminous clean air window alert with reminder toggle
+│   │   ├── HourlyStrip.tsx        # 24h interactive forecast: Graphic Chart, Table & GRAP rules
+│   │   ├── CriticalInterventions.tsx # Family checklist with live counter & HEPA mode switch
+│   │   ├── IndoorSanctuaryCard.tsx# Circular SVG AQI gauge & multi-room sensor drawer
+│   │   ├── CleanAirAdvisorCard.tsx# Inline prompt card with -32% exposure reduction tag
+│   │   ├── FloatingAdvisorBar.tsx # Pinned bottom copilot bar opening streaming chat
 │   │   ├── StatusStrip.tsx        # Responsive multi-pill metrics strip
-│   │   ├── HourlyStrip.tsx        # 24h bar strip with accessible SVG category patterns
 │   │   ├── HouseholdStepper.tsx   # 5-step onboarding wizard with inline validation
 │   │   ├── stepper/               # Stepper step views (Location, Members, Home, Mobility, Budget/Lang)
 │   │   ├── PersonaPresets.tsx     # One-click preset loader (Priya, Mehta, Rohan, Anil)
@@ -267,7 +301,7 @@ Saans avoids "black-box" magical numbers by publishing its exact calculation mec
 Saans features a multi-tiered test suite executing via Vitest:
 
 ```bash
-npm test             # Runs the 168 unit and integration tests across 25 suites
+npm test             # Runs the 177 unit and integration tests across 25 suites
 ```
 
 ### Test Suite Structure
@@ -321,7 +355,7 @@ To enable real-time Gemini-powered empathetic narration and streaming conversati
 2. Populate your Gemini API key in `.env.local`:
    ```env
    GEMINI_API_KEY=your_actual_gemini_api_key_here
-   GEMINI_MODEL=gemini-2.5-flash
+   GEMINI_MODEL=gemini-3.5-flash-lite
    LLM_PROVIDER=gemini
    ```
 3. Start the application:
