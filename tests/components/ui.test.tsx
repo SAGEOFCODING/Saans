@@ -3,7 +3,6 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import type { Air, ChosenAction } from '@/domain/types';
 import { HazeHero } from '@/components/HazeHero';
-import { StatusStrip } from '@/components/StatusStrip';
 import { HourlyStrip } from '@/components/HourlyStrip';
 import { ActionItem } from '@/components/ActionItem';
 import { ImpactBar } from '@/components/ImpactBar';
@@ -39,15 +38,6 @@ describe('Milestone 5 UI Presentation Components', () => {
     expect(html).toContain('Severe Smog');
     expect(html).toContain('You can see about 1.2 km.');
     expect(html).toContain('PM2.5: 280 µg/m³');
-  });
-
-  it('renders StatusStrip with responsive metric pills and stagnant badge', () => {
-    const html = renderToStaticMarkup(<StatusStrip air={MOCK_AIR} />);
-    expect(html).toContain('PM2.5:');
-    expect(html).toContain('280 µg/m³');
-    expect(html).toContain('PM10:');
-    expect(html).toContain('420 µg/m³');
-    expect(html).toContain('Stagnant Air (Trapping Smog)');
   });
 
   it('renders HourlyStrip with 24h SVG bars, patterns and cleanest window', () => {

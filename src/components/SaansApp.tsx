@@ -18,11 +18,7 @@ import { CleanAirAdvisorCard } from './CleanAirAdvisorCard';
 import { FloatingAdvisorBar } from './FloatingAdvisorBar';
 import { PersonaPresets } from './PersonaPresets';
 import { HouseholdStepper } from './HouseholdStepper';
-import { RiskSummary } from './RiskSummary';
-import { PlanTimeline } from './PlanTimeline';
-import { ImpactBar } from './ImpactBar';
-import { WhatIfPanel } from './WhatIfPanel';
-import { CommunityPack } from './CommunityPack';
+import { PlanDashboard } from './plan/PlanDashboard';
 import { SafetyNote } from './SafetyNote';
 
 const ChatSheet = dynamic(() => import('./ChatSheet'), { ssr: false });
@@ -75,7 +71,6 @@ export function SaansApp({ initialAir }: SaansAppProps) {
 
   const handleOpenChatWithQuery = useCallback((query?: string) => {
     setChatOpen(true);
-    // If a query was passed, it can be consumed by the chat drawer
     if (query) {
       setTimeout(() => {
         const chatInput = document.querySelector('textarea#advisor-chat-input') as HTMLTextAreaElement | null;
@@ -91,7 +86,6 @@ export function SaansApp({ initialAir }: SaansAppProps) {
 
   return (
     <div className="min-h-screen bg-surface-bright text-on-surface font-body-md flex flex-col selection:bg-primary/20 selection:text-primary">
-      {/* Top Atmospheric Glass Header */}
       <AppHeader
         location={location}
         onChangeLocationClick={() => {
@@ -99,9 +93,7 @@ export function SaansApp({ initialAir }: SaansAppProps) {
             lang === 'hi' ? 'अपना शहर दर्ज करें (उदा. Delhi, Noida, Gurugram):' : 'Enter city name (e.g. Delhi, Noida, Gurugram):',
             location.name
           );
-          if (newName && newName.trim()) {
-            setLocation((prev) => ({ ...prev, name: newName.trim() }));
-          }
+          if (newName && newName.trim()) setLocation((prev) => ({ ...prev, name: newName.trim() }));
         }}
         lang={lang}
         onLangChange={setLang}
@@ -109,13 +101,10 @@ export function SaansApp({ initialAir }: SaansAppProps) {
         onOpenPresets={() => setShowPresets((prev) => !prev)}
       />
 
-      {/* Main Content Area */}
       <main className="flex-1 w-full pb-28 pt-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          {/* Mode / Degraded status banner */}
           <ModeBanner mode={meta?.mode} airSource={meta?.airSource} airAgeMin={meta?.airAgeMin} />
 
-          {/* Quick Persona Presets Drawer (collapsible) */}
           {showPresets && (
             <div className="rounded-xl border border-line/40 bg-surface/90 backdrop-blur-md p-4 shadow-sm animate-fadeIn">
               <div className="flex items-center justify-between mb-3 border-b border-line/20 pb-2">
@@ -134,24 +123,10 @@ export function SaansApp({ initialAir }: SaansAppProps) {
             </div>
           )}
 
-          {/* 12-Column Grid (Left: 7 cols Telemetry & Forecast / Right: 5 cols Interventions & Sanctuary) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            {/* Left Hero Column (7 cols) */}
             <div className="lg:col-span-7 flex flex-col gap-5 min-w-0">
-              {/* 1. Haze Horizon Card */}
-              <HazeHero
-                air={activeAir}
-                lang={lang}
-                locationName={location.name}
-              />
-
-              {/* 2. Quick Clean Window Banner */}
-              <CleanWindowBanner
-                bestWindow={plan?.window?.best}
-                lang={lang}
-              />
-
-              {/* 3. 24-Hour Pollution Curve Card */}
+              <HazeHero air={activeAir} lang={lang} locationName={location.name} />
+              <CleanWindowBanner bestWindow={plan?.window?.best} lang={lang} />
               {activeAir?.hourly && (
                 <div id="forecast-curve">
                   <HourlyStrip
@@ -165,35 +140,19 @@ export function SaansApp({ initialAir }: SaansAppProps) {
               )}
             </div>
 
-            {/* Right Action Column (5 cols) */}
             <div className="lg:col-span-5 flex flex-col gap-5 min-w-0">
-              {/* 1. Critical Family Interventions */}
-              <CriticalInterventions
-                onToggleAction={handleToggleAction}
-                lang={lang}
-              />
-
-              {/* 2. Indoor Sanctuary Status Card */}
-              <IndoorSanctuaryCard
-                lang={lang}
-              />
-
-              {/* 3. Clean-Air Advisor Prompt Card */}
-              <CleanAirAdvisorCard
-                onAsk={handleOpenChatWithQuery}
-                lang={lang}
-              />
+              <CriticalInterventions onToggleAction={handleToggleAction} lang={lang} />
+              <IndoorSanctuaryCard lang={lang} />
+              <CleanAirAdvisorCard onAsk={handleOpenChatWithQuery} lang={lang} />
             </div>
           </div>
 
-          {/* Persona Presets (Always accessible in main stream) */}
           {!showPresets && (
             <div className="pt-2">
               <PersonaPresets onSelectPreset={handlePresetSelect} lang={lang} />
             </div>
           )}
 
-          {/* 5-Step Household Stepper Form */}
           <div className="pt-2">
             <HouseholdStepper
               household={household}
@@ -206,62 +165,31 @@ export function SaansApp({ initialAir }: SaansAppProps) {
             />
           </div>
 
-          {/* Screen Reader Live Status */}
           <div aria-live="polite" className="sr-only">
             {loading
-              ? (lang === 'hi'
-                  ? 'आपकी दैनिक स्वच्छ-वायु योजना बनाई जा रही है...'
-                  : 'Generating your personalized clean-air plan...')
+              ? (lang === 'hi' ? 'आपकी दैनिक स्वच्छ-वायु योजना बनाई जा रही है...' : 'Generating your personalized clean-air plan...')
               : plan
-              ? (lang === 'hi'
-                  ? `स्वच्छ-वायु योजना तैयार है: ${plan.blocks.length} समय-खंड और अनुशंसित उपाय।`
-                  : `Clean-air plan ready: ${plan.blocks.length} schedule blocks with recommended actions.`)
+              ? (lang === 'hi' ? `स्वच्छ-वायु योजना तैयार है: ${plan.blocks.length} समय-खंड।` : `Clean-air plan ready: ${plan.blocks.length} schedule blocks.`)
               : ''}
           </div>
 
-          {/* Error state */}
           {error && (
             <div className="my-4 rounded-xl border border-error/30 bg-error/10 p-4 text-xs font-semibold text-error">
               {error}
             </div>
           )}
 
-          {/* Generated Plan Section (60% timeline / 40% sticky what-if & impact panel) */}
           {plan && (
-            <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
-              <div className="lg:col-span-3 space-y-6">
-                <RiskSummary risks={plan.risks} members={household.members} lang={lang} />
-                <PlanTimeline
-                  blocks={plan.blocks}
-                  activeActionIds={activeActionIds}
-                  onToggleAction={handleToggleAction}
-                  lang={lang}
-                />
-              </div>
-
-              <aside className="lg:col-span-2 space-y-6 lg:sticky lg:top-20">
-                <ImpactBar
-                  baseline={simulation.baseline || plan.baseline || 100}
-                  planned={simulation.simulated || plan.planned || 65}
-                  co2eSavedKg={1.75}
-                  targetMember={
-                    household.members.find((m) => m.band === 'infant' || m.band === 'senior')?.band ??
-                    'vulnerable member'
-                  }
-                  lang={lang}
-                />
-                <WhatIfPanel
-                  activeActionIds={activeActionIds}
-                  onToggleAction={handleToggleAction}
-                  deltaPct={simulation.deltaPct}
-                  lang={lang}
-                />
-                <CommunityPack initialHouseholds={120} lang={lang} />
-              </aside>
-            </div>
+            <PlanDashboard
+              plan={plan}
+              household={household}
+              activeActionIds={activeActionIds}
+              simulation={simulation}
+              onToggleAction={handleToggleAction}
+              lang={lang}
+            />
           )}
 
-          {/* Bottom Safety Note */}
           <footer className="pt-8 border-t border-line/30 space-y-4">
             <SafetyNote lang={lang} />
             <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-on-surface-variant text-xs pb-6">
@@ -272,13 +200,7 @@ export function SaansApp({ initialAir }: SaansAppProps) {
         </div>
       </main>
 
-      {/* Persistent Floating Bottom Copilot Bar */}
-      <FloatingAdvisorBar
-        onOpenChat={handleOpenChatWithQuery}
-        lang={lang}
-      />
-
-      {/* Chat Sheet (SSE streaming Gemini) */}
+      <FloatingAdvisorBar onOpenChat={handleOpenChatWithQuery} lang={lang} />
       <ChatSheet
         isOpen={chatOpen}
         onClose={() => setChatOpen(false)}

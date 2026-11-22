@@ -7,6 +7,7 @@ import { StepMembers } from './stepper/StepMembers';
 import { StepHome } from './stepper/StepHome';
 import { StepMobility } from './stepper/StepMobility';
 import { StepBudgetLang } from './stepper/StepBudgetLang';
+import { StepperProgress } from './stepper/StepperProgress';
 
 interface HouseholdStepperProps {
   household: Household;
@@ -54,7 +55,6 @@ export function HouseholdStepper({
 
   return (
     <div className="rounded-panel border border-line/30 bg-surface/90 backdrop-blur-md p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all">
-      {/* Header and Step Indicator */}
       <div className="mb-5 flex items-center justify-between border-b border-line/20 pb-3.5">
         <div>
           <h2 className="text-base sm:text-lg font-bold text-ink tracking-tight font-display">
@@ -69,24 +69,13 @@ export function HouseholdStepper({
         </span>
       </div>
 
-      {/* Progress Bar Segments */}
-      <div className="mb-6 flex gap-2" role="tablist" aria-label="Wizard Steps">
-        {[1, 2, 3, 4, 5].map((s) => (
-          <button
-            key={s}
-            type="button"
-            role="tab"
-            onClick={() => setActiveStep(s)}
-            className={`h-2 flex-1 rounded-full transition-all duration-200 ${
-              s === activeStep ? 'bg-sky shadow-xs' : s < activeStep ? 'bg-sky/40' : 'bg-line/40 hover:bg-line/60'
-            }`}
-            aria-label={`${s}. ${STEP_TITLES[s - 1][isHi ? 'hi' : 'en']}`}
-            aria-selected={s === activeStep}
-          />
-        ))}
-      </div>
+      <StepperProgress
+        activeStep={activeStep}
+        stepTitles={STEP_TITLES}
+        isHi={isHi}
+        onStepClick={setActiveStep}
+      />
 
-      {/* Active Step Content */}
       <div className="min-h-[170px]">
         {activeStep === 1 && (
           <StepLocation location={location} onChange={onChangeLocation} lang={lang} />
@@ -128,7 +117,6 @@ export function HouseholdStepper({
         )}
       </div>
 
-      {/* Navigation Controls */}
       <div id="stepper-controls" className="mt-5 flex items-center justify-between border-t border-line/50 pt-3.5">
         <button
           type="button"

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { Household, Location } from '@/domain/types';
 import { useChat } from '@/hooks/useChat';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { CloseIcon, AlertIcon } from './Icons';
 
 interface ChatSheetProps {
@@ -34,55 +35,7 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
     }
   }, [messages, isStreaming]);
 
-  // Focus management & Escape key trap
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const previouslyFocused = document.activeElement as HTMLElement | null;
-
-    // Focus close button on mount
-    const timer = setTimeout(() => {
-      closeButtonRef.current?.focus();
-    }, 50);
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        onClose();
-        return;
-      }
-
-      if (e.key === 'Tab' && drawerRef.current) {
-        const focusableElements = drawerRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusableElements.length === 0) return;
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('keydown', handleKeyDown);
-      previouslyFocused?.focus();
-    };
-  }, [isOpen, onClose]);
+  useFocusTrap(isOpen, drawerRef, closeButtonRef, onClose);
 
   if (!isOpen) return null;
 
@@ -106,7 +59,6 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
         ref={drawerRef}
         className="flex h-full w-full sm:max-w-md flex-col bg-surface shadow-2xl border-l border-line"
       >
-        {/* Drawer Header */}
         <div className="flex items-center justify-between border-b border-line p-4">
           <div>
             <h3 id="chat-sheet-title" className="text-base font-bold text-ink">
@@ -127,7 +79,6 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
           </button>
         </div>
 
-        {/* Emergency Medical Care Warning Banner */}
         <div className="flex items-center gap-2 border-b border-caution/20 bg-caution/10 px-4 py-2 text-xs text-caution">
           <AlertIcon size={16} className="shrink-0" />
           <span>
@@ -137,7 +88,6 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
           </span>
         </div>
 
-        {/* Messages Container with live region */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3" role="log" aria-live="polite">
           {messages.length === 0 ? (
             <div className="space-y-3 pt-4">
@@ -178,12 +128,10 @@ export default function ChatSheet({ isOpen, onClose, household, location, lang =
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Hidden screen-reader announcement for streamed response completion */}
         <div aria-live="polite" className="sr-only">
           {!isStreaming && lastAssistantMessage ? lastAssistantMessage : ''}
         </div>
 
-        {/* Input Bar */}
         <form onSubmit={handleSubmit} className="border-t border-line p-3 flex gap-2 bg-surface">
           <label htmlFor="chat-message-input" className="sr-only">
             {isHi ? 'सलाहकार के लिए आपका प्रश्न' : 'Your question for the advisor'}
