@@ -7,7 +7,7 @@ export class GeminiProvider implements LLMProvider {
 
   private getClient(): { client: GoogleGenAI; model: string } {
     const apiKey = process.env.GEMINI_API_KEY || '';
-    const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+    const model = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
     return { client: new GoogleGenAI({ apiKey }), model };
   }
 

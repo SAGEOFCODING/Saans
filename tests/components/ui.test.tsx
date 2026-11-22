@@ -53,11 +53,14 @@ describe('Milestone 5 UI Presentation Components', () => {
   it('renders HourlyStrip with 24h SVG bars, patterns and cleanest window', () => {
     const bestWindow = { start: '13:00', end: '16:00' };
     const html = renderToStaticMarkup(
-      <HourlyStrip hourly={MOCK_AIR.hourly} bestWindow={bestWindow} />
+      <HourlyStrip hourly={MOCK_AIR.hourly} bestWindow={bestWindow} currentAqi={380} />
     );
     expect(html).toContain('24-Hour Forecast &amp; Cleanest Window');
     expect(html).toContain('13:00–16:00');
     expect(html).toContain('pat-sev');
+    expect(html).toContain('Graphic Chart');
+    expect(html).toContain('Hourly Table');
+    expect(html).toContain('GRAP Rules');
   });
 
   it('renders ActionItem with verb title, why clause, cost/effort chips, and gain badge', () => {

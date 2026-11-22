@@ -132,6 +132,7 @@ export function SaansApp({ initialAir }: SaansAppProps) {
             bestWindow={plan?.window?.best}
             worstWindow={plan?.window?.worst}
             lang={lang}
+            currentAqi={activeAir.aqi}
           />
         )}
       </div>
