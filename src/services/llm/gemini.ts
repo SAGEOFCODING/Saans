@@ -36,12 +36,16 @@ export class GeminiProvider implements LLMProvider {
       parts: [{ text: m.content }],
     }));
 
+    const factsPrompt = req.toolContext
+      ? `\nFACTS:\n- Current Air: AQI ${req.toolContext.air.aqi} (${req.toolContext.air.category}), PM2.5 ${req.toolContext.air.pm25} µg/m³, PM10 ${req.toolContext.air.pm10} µg/m³, Temperature ${req.toolContext.air.tempC}°C, Wind ${req.toolContext.air.windKmh} km/h, Stagnant: ${req.toolContext.air.stagnant}.\n- Household: ${req.toolContext.household.members.length} members, home: ${req.toolContext.household.home.type}, budget: ${req.toolContext.household.budget}, purifier: ${req.toolContext.household.home.purifier}.\n- Language: ${req.lang === 'hi' ? 'Hindi (Devanagari)' : 'English'}.`
+      : '';
+
     try {
       const responseStream = await client.models.generateContentStream({
         model,
         contents,
         config: {
-          systemInstruction: req.system,
+          systemInstruction: req.system + factsPrompt,
           temperature: 0.3,
           maxOutputTokens: 1024,
         },

@@ -158,4 +158,42 @@ describe('Golden & Red-Team Test Set (AGENTS.md §B7)', () => {
     // DIY / zero-cost options present
     expect(actionIds.some((id) => id.includes('seal') || id.includes('draft') || id.includes('recirculate') || id.includes('vessel'))).toBe(true);
   });
+
+  describe('Chatbot Suggested Questions & Multilingual Handling', () => {
+    it('answers outdoor play at 4 pm with play window and risk warning', async () => {
+      const { events, text } = await collectChatTokens([{ role: 'user', content: 'Can my child play in the park at 4 pm?' }]);
+      expect(events.some((e) => e.event === 'tool' && e.data.name === 'get_best_window')).toBe(true);
+      expect(text.toLowerCase()).toMatch(/outdoor play|afternoon|high risk|indoors/i);
+    });
+
+    it('answers outdoor play at 4 pm in Hindi when asked in Hindi', async () => {
+      const { text } = await collectChatTokens([{ role: 'user', content: 'क्या मेरा बच्चा शाम 4 बजे पार्क में खेल सकता है?' }]);
+      expect(text).toMatch(/[\u0900-\u097F]/);
+      expect(text).toMatch(/पार्क|शाम|दोपहर|अंदर/);
+    });
+
+    it('answers mask question explaining why cloth masks fail and recommending N95', async () => {
+      const { events, text } = await collectChatTokens([{ role: 'user', content: 'Does a cloth or surgical mask help in smog?' }]);
+      expect(events.some((e) => e.event === 'tool' && e.data.name === 'lookup_playbook')).toBe(true);
+      expect(text.toLowerCase()).toMatch(/cloth|surgical|n95|ffp2/i);
+    });
+
+    it('answers mask question in Hindi when asked in Hindi', async () => {
+      const { text } = await collectChatTokens([{ role: 'user', content: 'क्या कपड़े या सर्जिकल मास्क से स्मॉग रुकता है?' }]);
+      expect(text).toMatch(/[\u0900-\u097F]/);
+      expect(text).toMatch(/N95|FFP2|मास्क/);
+    });
+
+    it('answers purifier placement with bedroom and 360 airflow guidance', async () => {
+      const { events, text } = await collectChatTokens([{ role: 'user', content: 'Where should I place the air purifier?' }]);
+      expect(events.some((e) => e.event === 'tool' && e.data.name === 'lookup_playbook')).toBe(true);
+      expect(text.toLowerCase()).toMatch(/bedroom|airflow|walls|closed/i);
+    });
+
+    it('answers purifier placement in Hindi when asked in Hindi', async () => {
+      const { text } = await collectChatTokens([{ role: 'user', content: 'कमरे में एयर प्यूरीफायर कहां रखना चाहिए?' }]);
+      expect(text).toMatch(/[\u0900-\u097F]/);
+      expect(text).toMatch(/बेडरूम|प्यूरीफायर/);
+    });
+  });
 });

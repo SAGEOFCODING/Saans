@@ -31,6 +31,7 @@ export interface StreamRequest {
   messages: ChatMessage[];
   tools?: ToolDefinition[];
   toolContext?: ToolContext;
+  lang?: 'en' | 'hi';
 }
 
 export interface LLMProvider {

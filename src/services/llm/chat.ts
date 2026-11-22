@@ -50,6 +50,7 @@ export async function* runChat(params: {
     messages: trimmed,
     tools: TOOL_DEFINITIONS,
     toolContext,
+    lang: isHindi ? 'hi' : 'en',
   });
 
   for await (const chunk of stream) {
