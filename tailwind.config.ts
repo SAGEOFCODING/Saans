@@ -73,7 +73,8 @@ const config: Config = {
       },
       fontFamily: {
         display: [
-          '"Bricolage Grotesque"',
+          '"Anthropic Sans"',
+          '"Mukta"',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
@@ -81,6 +82,7 @@ const config: Config = {
           'sans-serif',
         ],
         body: [
+          '"Anthropic Sans"',
           '"Mukta"',
           'system-ui',
           '-apple-system',
@@ -90,6 +92,7 @@ const config: Config = {
           'sans-serif',
         ],
         sans: [
+          '"Anthropic Sans"',
           '"Mukta"',
           'system-ui',
           '-apple-system',
@@ -99,6 +102,7 @@ const config: Config = {
           'sans-serif',
         ],
         mono: [
+          '"Anthropic Mono"',
           '"JetBrains Mono"',
           'ui-monospace',
           'SFMono-Regular',
